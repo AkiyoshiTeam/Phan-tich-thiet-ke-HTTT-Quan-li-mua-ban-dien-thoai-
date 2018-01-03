@@ -1,0 +1,15 @@
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\Quản lí bán hàng siêu thị điện thoại\bin\Debug\Quản lí bán hàng siêu thị điện thoại.exe.config
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\Quản lí bán hàng siêu thị điện thoại\bin\Debug\Quản lí bán hàng siêu thị điện thoại.exe
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\Quản lí bán hàng siêu thị điện thoại\bin\Debug\Quản lí bán hàng siêu thị điện thoại.pdb
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\Quản lí bán hàng siêu thị điện thoại\bin\Debug\BUS.dll
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\Quản lí bán hàng siêu thị điện thoại\bin\Debug\DTO.dll
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\Quản lí bán hàng siêu thị điện thoại\bin\Debug\BUS.pdb
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\Quản lí bán hàng siêu thị điện thoại\bin\Debug\DTO.pdb
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\Quản lí bán hàng siêu thị điện thoại\obj\Debug\Quản lí bán hàng siêu thị điện thoại.csprojResolveAssemblyReference.cache
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\Quản lí bán hàng siêu thị điện thoại\obj\Debug\Quản_lí_bán_hàng_siêu_thị_điện_thoại.Properties.Resources.resources
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\Quản lí bán hàng siêu thị điện thoại\obj\Debug\Quản lí bán hàng siêu thị điện thoại.csproj.GenerateResource.Cache
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\Quản lí bán hàng siêu thị điện thoại\obj\Debug\Quản lí bán hàng siêu thị điện thoại.csproj.CoreCompileInputs.cache
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\Quản lí bán hàng siêu thị điện thoại\obj\Debug\Quản lí bán hàng siêu thị điện thoại.exe
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\Quản lí bán hàng siêu thị điện thoại\obj\Debug\Quản lí bán hàng siêu thị điện thoại.pdb
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\Quản lí bán hàng siêu thị điện thoại\obj\Debug\Quản_lí_bán_hàng_siêu_thị_điện_thoại.frmDatHang.resources
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\Quản lí bán hàng siêu thị điện thoại\obj\Debug\Quản_lí_bán_hàng_siêu_thị_điện_thoại.frmManHinhChinh.resources

@@ -1,0 +1,6 @@
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\DTO\bin\Debug\DTO.dll
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\DTO\bin\Debug\DTO.pdb
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\DTO\obj\Debug\DTO.csprojResolveAssemblyReference.cache
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\DTO\obj\Debug\DTO.dll
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\DTO\obj\Debug\DTO.pdb

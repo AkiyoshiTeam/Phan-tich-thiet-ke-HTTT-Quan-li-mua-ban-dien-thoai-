@@ -1,0 +1,10 @@
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\BUS\bin\Debug\BUS.dll
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\BUS\bin\Debug\BUS.pdb
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\BUS\bin\Debug\DAO.dll
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\BUS\bin\Debug\DTO.dll
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\BUS\bin\Debug\DAO.pdb
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\BUS\bin\Debug\DTO.pdb
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\BUS\obj\Debug\BUS.csprojResolveAssemblyReference.cache
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\BUS\obj\Debug\BUS.csproj.CoreCompileInputs.cache
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\BUS\obj\Debug\BUS.dll
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\BUS\obj\Debug\BUS.pdb
