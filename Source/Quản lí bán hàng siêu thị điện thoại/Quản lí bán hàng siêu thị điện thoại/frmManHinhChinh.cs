@@ -22,5 +22,11 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
             frmDatHang frm = new frmDatHang();
             frm.ShowDialog();
         }
+
+        private void btnBanHang_Click(object sender, EventArgs e)
+        {
+            frmHoaDon frm = new frmHoaDon();
+            frm.ShowDialog();
+        }
     }
 }

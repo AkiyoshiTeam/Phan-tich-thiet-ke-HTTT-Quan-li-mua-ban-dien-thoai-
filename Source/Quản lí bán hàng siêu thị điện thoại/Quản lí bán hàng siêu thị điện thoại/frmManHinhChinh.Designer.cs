@@ -33,7 +33,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnBanHang = new System.Windows.Forms.Button();
             this.btnDatHang = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -62,7 +62,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.btnBanHang);
             this.groupBox1.Controls.Add(this.btnDatHang);
             this.groupBox1.Location = new System.Drawing.Point(435, 133);
             this.groupBox1.Name = "groupBox1";
@@ -80,14 +80,15 @@
             this.button3.Text = "Bảo hành sản phẩm";
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnBanHang
             // 
-            this.button2.Location = new System.Drawing.Point(186, 29);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(109, 29);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Bán hàng";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnBanHang.Location = new System.Drawing.Point(186, 29);
+            this.btnBanHang.Name = "btnBanHang";
+            this.btnBanHang.Size = new System.Drawing.Size(109, 29);
+            this.btnBanHang.TabIndex = 1;
+            this.btnBanHang.Text = "Bán hàng";
+            this.btnBanHang.UseVisualStyleBackColor = true;
+            this.btnBanHang.Click += new System.EventHandler(this.btnBanHang_Click);
             // 
             // btnDatHang
             // 
@@ -125,7 +126,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnBanHang;
         private System.Windows.Forms.Button btnDatHang;
     }
 }

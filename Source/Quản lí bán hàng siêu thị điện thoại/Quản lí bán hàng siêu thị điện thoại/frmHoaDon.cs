@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
 {
-    public partial class frmDatHang : Form
+    public partial class frmHoaDon : Form
     {
-        public frmDatHang()
+        public frmHoaDon()
         {
             InitializeComponent();
         }
@@ -20,12 +20,6 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
         private void tsbtnThoat_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void tsbtnLapphieu_Click(object sender, EventArgs e)
-        {
-            frmLapPhieuDat frm = new frmLapPhieuDat();
-            frm.ShowDialog();
         }
     }
 }
