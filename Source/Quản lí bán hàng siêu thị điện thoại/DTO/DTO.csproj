@@ -40,15 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChiTietDonBaoHanhDTO.cs" />
     <Compile Include="ChiTietDonDatHangDTO.cs" />
-    <Compile Include="DonBaoHanhDTO.cs" />
     <Compile Include="DonDatHangDTO.cs" />
-    <Compile Include="LoaiBaoHanhDTO.cs" />
-    <Compile Include="NhaCungCapDTO.cs" />
-    <Compile Include="SanPhamDTO.cs" />
+    <Compile Include="HoaDonThanhToanDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TinhTrangPhieuDatDTO.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

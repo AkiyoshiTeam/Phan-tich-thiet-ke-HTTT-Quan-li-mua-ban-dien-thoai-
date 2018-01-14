@@ -8,15 +8,12 @@ namespace DTO
 {
     public class DonDatHangDTO
     {
-        int _soPhieuDat, _maNhaCC, _maTinhTrang;
-        long _tongTien;
-        DateTime _ngayDatHang, _ngayHenGH;
+        string _maDonDatHang;
+        DateTime _ngayLap;
+        int _maTrangThai;
 
-        public int SoPhieuDat { get => _soPhieuDat; set => _soPhieuDat = value; }
-        public int MaNhaCC { get => _maNhaCC; set => _maNhaCC = value; }
-        public int MaTinhTrang { get => _maTinhTrang; set => _maTinhTrang = value; }
-        public long TongTien { get => _tongTien; set => _tongTien = value; }
-        public DateTime NgayDatHang { get => _ngayDatHang; set => _ngayDatHang = value; }
-        public DateTime NgayHenGH { get => _ngayHenGH; set => _ngayHenGH = value; }
+        public string MaDonDatHang { get => _maDonDatHang; set => _maDonDatHang = value; }
+        public DateTime NgayLap { get => _ngayLap; set => _ngayLap = value; }
+        public int MaTrangThai { get => _maTrangThai; set => _maTrangThai = value; }
     }
 }
