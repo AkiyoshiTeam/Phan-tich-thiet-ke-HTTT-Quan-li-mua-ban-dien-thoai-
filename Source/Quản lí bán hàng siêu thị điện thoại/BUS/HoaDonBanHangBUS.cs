@@ -20,5 +20,72 @@ namespace BUS
         {
             return HoaDonBanHangDAO.LoadDSCTHoaDon(MaHD);
         }
+
+        public static string GetIDHoaDon()
+        {
+            return HoaDonBanHangDAO.GetIDHoaDon();
+        }
+
+        public static bool ThemHD(HoaDonBanHangDTO HD)
+        {
+            return HoaDonBanHangDAO.ThemHD(HD);
+        }
+
+        public static bool XoaHD(string MaHD)
+        {
+            return HoaDonBanHangDAO.XoaHD(MaHD);
+        }
+
+        public static string KiemTra(ChiTietHoaDonBanHangDTO CT)
+        {
+            string thongbao = "";
+            if (CT.MaSanPham == "")
+                thongbao += "-Mã sản phẩm không được để trống.\n";
+            if (CT.SoLuong == 0)
+                thongbao += "-Số lượng không được để trống.\n";
+            return thongbao;
+        }
+
+        public static int TinhTongTien(int SoLuong, int Gia)
+        {
+            int Tong = 0;
+            Tong = SoLuong * Gia;
+            return Tong;
+        }
+
+        public static bool ThemCTHD(ChiTietHoaDonBanHangDTO CTHD)
+        {
+            return HoaDonBanHangDAO.ThemCTHD(CTHD);
+        }
+
+        public static bool UpdateTT(string MaHD, long TongTien)
+        {
+            return HoaDonBanHangDAO.UpdateTT(MaHD,TongTien);
+        }
+
+        public static bool UpdateSLT(string MaSP, int SoLuongBan)
+        {
+            return HoaDonBanHangDAO.UpdateSLT(MaSP, SoLuongBan);
+        }
+
+        public static bool KiemTraSLT(string MaSP, int SL)
+        {
+            DataTable dt  = SanPhamBUS.DanhSachSPTheoMa(MaSP);
+            int soluongton = 0, hieu;
+            foreach(DataRow row in dt.Rows)
+            {
+                soluongton = (int)row["SoLuongTon"];
+            }
+            hieu = soluongton - SL;
+            if (hieu < 0)
+                return false;
+            else
+                return true;
+        }
+
+        public static DataSet XuatHoaDonBanHang(string MaHD)
+        {
+            return HoaDonBanHangDAO.XuatHoaDonBanHang(MaHD);
+        }
     }
 }

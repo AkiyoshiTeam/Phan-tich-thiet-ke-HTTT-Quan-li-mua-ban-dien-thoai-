@@ -185,5 +185,15 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
                 dgvChiTiet.ClearSelection();
             }
         }
+
+        private void tsbtnXoa_Click(object sender, EventArgs e)
+        {
+            if (HoaDonBanHangBUS.XoaHD(dgvDanhSach.CurrentRow.Cells[0].Value.ToString()) == true)
+            {
+                LoadData();
+            }
+            else
+                MessageBox.Show("Xóa thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 }

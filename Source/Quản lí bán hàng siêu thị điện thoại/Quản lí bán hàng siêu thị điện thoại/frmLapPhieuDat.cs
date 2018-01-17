@@ -163,6 +163,8 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
             if (e.ColumnIndex == 4)
             {
                 dgvDanhSach.Rows.RemoveAt(e.RowIndex);
+                i--;
+                TongTien();
             }
         }
 
@@ -177,6 +179,7 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
                 if (DonDatHangBUS.ThemCTPD(PN) == true)
                 {
                     btnIn.Enabled = false;
+                    btnThemSP.Enabled = false;
                     // Update tổng tiền.
                     if (DonDatHangBUS.UpdateTT(txtSoPĐ.Text, Tien) == false)
                         MessageBox.Show("Cập nhật tổng tiền thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);

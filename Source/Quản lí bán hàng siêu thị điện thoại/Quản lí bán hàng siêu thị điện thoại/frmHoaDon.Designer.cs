@@ -137,6 +137,7 @@
             this.tsbtnXoa.Size = new System.Drawing.Size(92, 72);
             this.tsbtnXoa.Text = "Xóa hóa đơn";
             this.tsbtnXoa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsbtnXoa.Click += new System.EventHandler(this.tsbtnXoa_Click);
             // 
             // toolStripSeparator2
             // 
