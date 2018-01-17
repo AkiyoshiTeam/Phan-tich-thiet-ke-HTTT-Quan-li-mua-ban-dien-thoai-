@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DTO;
 
 namespace DAO
 {
@@ -34,6 +35,98 @@ namespace DAO
             da.Fill(dt);
             con.Close();
             return dt;
+        }
+
+        public static string GetIDPhieuDat()
+        {
+            SqlConnection con = DataProvider.Connection();
+            SqlCommand cmd = new SqlCommand("sp_GetIDPhieuDat", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@maddh", SqlDbType.NChar);
+            cmd.Parameters["@maddh"].Direction = ParameterDirection.Output;
+            cmd.Parameters["@maddh"].Size = 10;
+            cmd.ExecuteNonQuery();
+            string MaDDH = cmd.Parameters["@maddh"].Value.ToString();
+            con.Close();
+            return MaDDH;
+        }
+
+        public static bool ThemPD(DonDatHangDTO DDH)
+        {
+            try
+            {
+                SqlConnection con = DataProvider.Connection();
+                SqlCommand cmd = new SqlCommand("sp_ThemPD", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@maddh", SqlDbType.VarChar);
+                cmd.Parameters.Add("@ngaydat", SqlDbType.Date);
+              
+                cmd.Parameters["@maddh"].Value = DDH.MaDonDatHang;
+                cmd.Parameters["@ngaydat"].Value = DDH.NgayLap;
+                cmd.ExecuteNonQuery();
+                con.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public static bool ThemCTPD(ChiTietDonDatHangDTO PD)
+        {
+            try
+            {
+                SqlConnection con = DataProvider.Connection();
+                SqlCommand cmd = new SqlCommand("sp_ThemCTPhieuDat", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@maddh", SqlDbType.VarChar);
+                cmd.Parameters.Add("@masp", SqlDbType.VarChar);
+                cmd.Parameters.Add("@soluong", SqlDbType.Int);
+
+                cmd.Parameters["@maddh"].Value = PD.MaDonDatHang;
+                cmd.Parameters["@masp"].Value = PD.MaSanPham;
+                cmd.Parameters["@soluong"].Value = PD.SoLuong;
+                cmd.ExecuteNonQuery();
+                con.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static DataSet XuatDonDatHang(string MaDDH)
+        {
+            SqlConnection con = DataProvider.Connection();
+            DataSet dtset = new DataSet();
+            string sql = @"Select D.MaDonDatHang,D.NgayLap,S.MaSanPham,S.TenSanPham,C.SoLuong " +
+                          "From (DonDatHang D join ChiTietDonDatHang C on D.MaDonDatHang=C.MaDonDatHang) join SanPham S on C.MaSanPham=S.MaSanPham " +
+                          "Where D.MaDonDatHang ='" + MaDDH + "'";
+            SqlDataAdapter da = new SqlDataAdapter(sql, con);
+            da.Fill(dtset, "dtDonDatHang");
+            con.Close();
+            return dtset;
+        }
+
+        public static bool XoaPD(string MaDDH)
+        {
+            try
+            {
+                SqlConnection con = DataProvider.Connection();
+                SqlCommand cmd = new SqlCommand("sp_XoaPD", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@maddh", SqlDbType.NChar);
+                cmd.Parameters["@maddh"].Value = MaDDH;
+                cmd.ExecuteNonQuery();
+                con.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

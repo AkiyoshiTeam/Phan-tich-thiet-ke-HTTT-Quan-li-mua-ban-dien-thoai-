@@ -32,7 +32,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnNhanHang = new System.Windows.Forms.Button();
             this.btnBanHang = new System.Windows.Forms.Button();
             this.btnDatHang = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -61,7 +61,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button3);
+            this.groupBox1.Controls.Add(this.btnNhanHang);
             this.groupBox1.Controls.Add(this.btnBanHang);
             this.groupBox1.Controls.Add(this.btnDatHang);
             this.groupBox1.Location = new System.Drawing.Point(435, 133);
@@ -71,14 +71,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Chức năng";
             // 
-            // button3
+            // btnNhanHang
             // 
-            this.button3.Location = new System.Drawing.Point(57, 67);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(238, 29);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Bảo hành sản phẩm";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnNhanHang.Location = new System.Drawing.Point(57, 67);
+            this.btnNhanHang.Name = "btnNhanHang";
+            this.btnNhanHang.Size = new System.Drawing.Size(238, 29);
+            this.btnNhanHang.TabIndex = 2;
+            this.btnNhanHang.Text = "Nhận hàng";
+            this.btnNhanHang.UseVisualStyleBackColor = true;
             // 
             // btnBanHang
             // 
@@ -125,7 +125,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnNhanHang;
         private System.Windows.Forms.Button btnBanHang;
         private System.Windows.Forms.Button btnDatHang;
     }

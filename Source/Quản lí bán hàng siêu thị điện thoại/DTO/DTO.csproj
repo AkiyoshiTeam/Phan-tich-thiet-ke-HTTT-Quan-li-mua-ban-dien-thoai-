@@ -43,6 +43,7 @@
     <Compile Include="ChiTietDonDatHangDTO.cs" />
     <Compile Include="DonDatHangDTO.cs" />
     <Compile Include="HoaDonThanhToanDTO.cs" />
+    <Compile Include="NhaCungCapDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

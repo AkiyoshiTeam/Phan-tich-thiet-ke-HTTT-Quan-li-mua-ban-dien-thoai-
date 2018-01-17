@@ -20,5 +20,44 @@ namespace BUS
         {
             return DonDatHangDAO.DanhSachCTPD(MaPD);
         }
+
+        public static string GetIDPhieuDat()
+        {
+            return DonDatHangDAO.GetIDPhieuDat();
+        }
+
+        public static bool ThemPD(DonDatHangDTO DDH)
+        {
+            return DonDatHangDAO.ThemPD(DDH);
+        }
+
+        public static string KiemTra(ChiTietDonDatHangDTO CT, string TenSP, string LoaiSP)
+        {
+            string thongbao = "";
+            if (CT.MaSanPham == "")
+                thongbao += "-Mã sản phẩm không được để trống.\n";
+            if (CT.SoLuong == 0)
+                thongbao += "-Số lượng không được để trống.\n";
+            if (TenSP =="")
+                thongbao += "-Tên sản phẩm không được để trống.\n";
+            if(LoaiSP=="")
+                thongbao += "-Loại sản phẩm không được để trống.\n";
+            return thongbao;
+        }
+
+        public static bool ThemCTPD(ChiTietDonDatHangDTO PD)
+        {
+            return DonDatHangDAO.ThemCTPD(PD);
+        }
+
+        public static DataSet XuatDonDatHang(string MaDDH)
+        {
+            return DonDatHangDAO.XuatDonDatHang(MaDDH);
+        }
+
+        public static bool XoaPD(string MaDDH)
+        {
+            return DonDatHangDAO.XoaPD(MaDDH);
+        }
     }
 }
