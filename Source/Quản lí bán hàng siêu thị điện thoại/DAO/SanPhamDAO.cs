@@ -25,7 +25,7 @@ namespace DAO
         {
             SqlConnection con = DataProvider.Connection();
             DataTable dt = new DataTable();
-            string sql = @"Select SP.TenSanPham,L.TenLoaiSanPham From SanPham SP join LoaiSanPham L on SP.MaLoaiSanPham = L.MaLoaiSanPham Where MaSanPham='" + maSP + "'";
+            string sql = @"Select * From SanPham Where MaSanPham='" + maSP + "'";
             SqlDataAdapter da = new SqlDataAdapter(sql, con);
             da.Fill(dt);
             con.Close();

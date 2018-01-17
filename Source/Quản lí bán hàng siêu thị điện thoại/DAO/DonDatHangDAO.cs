@@ -15,7 +15,7 @@ namespace DAO
         {
             SqlConnection con = DataProvider.Connection();
             DataTable dt = new DataTable();
-            string sql = @"Select D.MaDonDatHang, D.NgayLap, T.TenTrangThai" +
+            string sql = @"Select D.MaDonDatHang, D.NgayLap,D.TongTien, T.TenTrangThai" +
                            " From DonDatHang D join TrangThaiDonDatHang T on D.MaTrangTrangThai = T.MaTrangThaiDonDatHang" +
                            " Where T.TenTrangThai= N'Chưa xác nhận' or T.TenTrangThai= N'Đã xác nhận'";
             SqlDataAdapter da = new SqlDataAdapter(sql, con);
@@ -28,7 +28,7 @@ namespace DAO
         {
             SqlConnection con = DataProvider.Connection();
             DataTable dt = new DataTable();
-            string sql = @"Select SP.MaSanPham, SP.TenSanPham, CT.SoLuong " +
+            string sql = @"Select SP.MaSanPham, SP.TenSanPham, SP.GiaMua, CT.SoLuong " +
                           "From (DonDatHang D join ChiTietDonDatHang CT on D.MaDonDatHang=CT.MaDonDatHang) join SanPham SP on CT.MaSanPham=SP.MaSanPham " +
                           "Where D.MaDonDatHang =" + "'" + MaPD + "'";
             SqlDataAdapter da = new SqlDataAdapter(sql, con);
@@ -101,7 +101,7 @@ namespace DAO
         {
             SqlConnection con = DataProvider.Connection();
             DataSet dtset = new DataSet();
-            string sql = @"Select D.MaDonDatHang,D.NgayLap,S.MaSanPham,S.TenSanPham,C.SoLuong " +
+            string sql = @"Select D.MaDonDatHang,D.NgayLap,S.MaSanPham,S.TenSanPham,C.SoLuong,S.GiaMua,D.TongTien " +
                           "From (DonDatHang D join ChiTietDonDatHang C on D.MaDonDatHang=C.MaDonDatHang) join SanPham S on C.MaSanPham=S.MaSanPham " +
                           "Where D.MaDonDatHang ='" + MaDDH + "'";
             SqlDataAdapter da = new SqlDataAdapter(sql, con);
@@ -119,6 +119,23 @@ namespace DAO
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("@maddh", SqlDbType.NChar);
                 cmd.Parameters["@maddh"].Value = MaDDH;
+                cmd.ExecuteNonQuery();
+                con.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool UpdateTT(string MaDDH, int TongTien)
+        {
+            try
+            {
+                SqlConnection con = DataProvider.Connection();
+                string sql = @"Update DonDatHang set TongTien='" + TongTien.ToString() + "' Where MaDonDatHang='" + MaDDH + "'";
+                SqlCommand cmd = new SqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
                 con.Close();
                 return true;

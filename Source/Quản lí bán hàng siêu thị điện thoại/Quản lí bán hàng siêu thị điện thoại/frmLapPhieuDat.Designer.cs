@@ -31,13 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLapPhieuDat));
             this.btnThemSP = new System.Windows.Forms.Button();
             this.txtMaSP = new System.Windows.Forms.TextBox();
-            this.txtLoaiSP = new System.Windows.Forms.TextBox();
+            this.txtGia = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dgvDanhSach = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colXoa = new System.Windows.Forms.DataGridViewImageColumn();
             this.txtTenSP = new System.Windows.Forms.TextBox();
             this.btnThoat = new System.Windows.Forms.Button();
             this.txtSoLuong = new System.Windows.Forms.TextBox();
@@ -60,6 +56,11 @@
             this.label12 = new System.Windows.Forms.Label();
             this.txtTongtien = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colXoa = new System.Windows.Forms.DataGridViewImageColumn();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDanhSach)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -89,13 +90,13 @@
             this.txtMaSP.TabStop = false;
             this.txtMaSP.TextChanged += new System.EventHandler(this.txtMaSP_TextChanged);
             // 
-            // txtLoaiSP
+            // txtGia
             // 
-            this.txtLoaiSP.Location = new System.Drawing.Point(316, 69);
-            this.txtLoaiSP.Name = "txtLoaiSP";
-            this.txtLoaiSP.ReadOnly = true;
-            this.txtLoaiSP.Size = new System.Drawing.Size(302, 26);
-            this.txtLoaiSP.TabIndex = 9;
+            this.txtGia.Location = new System.Drawing.Point(316, 69);
+            this.txtGia.Name = "txtGia";
+            this.txtGia.ReadOnly = true;
+            this.txtGia.Size = new System.Drawing.Size(302, 26);
+            this.txtGia.TabIndex = 9;
             // 
             // groupBox3
             // 
@@ -115,6 +116,7 @@
             this.dgvDanhSach.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
+            this.Column3,
             this.Column5,
             this.colXoa});
             this.dgvDanhSach.Location = new System.Drawing.Point(10, 25);
@@ -124,36 +126,7 @@
             this.dgvDanhSach.Size = new System.Drawing.Size(762, 215);
             this.dgvDanhSach.TabIndex = 3;
             this.dgvDanhSach.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDanhSach_CellClick);
-            // 
-            // Column1
-            // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Column1.HeaderText = "Mã sản phẩm";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 116;
-            // 
-            // Column2
-            // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column2.HeaderText = "Tên sản phẩm";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Column5
-            // 
-            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Column5.HeaderText = "Số lượng";
-            this.Column5.Name = "Column5";
-            this.Column5.Width = 89;
-            // 
-            // colXoa
-            // 
-            this.colXoa.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colXoa.HeaderText = "Xóa";
-            this.colXoa.Image = ((System.Drawing.Image)(resources.GetObject("colXoa.Image")));
-            this.colXoa.Name = "colXoa";
-            this.colXoa.Width = 41;
+            this.dgvDanhSach.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDanhSach_CellEndEdit);
             // 
             // txtTenSP
             // 
@@ -174,6 +147,7 @@
             this.btnThoat.Text = "Thoát";
             this.btnThoat.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThoat.UseVisualStyleBackColor = true;
+            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
             // txtSoLuong
             // 
@@ -312,9 +286,9 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(244, 72);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(61, 19);
+            this.label8.Size = new System.Drawing.Size(33, 19);
             this.label8.TabIndex = 3;
-            this.label8.Text = "Loại SP:";
+            this.label8.Text = "Giá:";
             // 
             // label7
             // 
@@ -338,7 +312,7 @@
             // 
             this.groupBox2.Controls.Add(this.btnThemSP);
             this.groupBox2.Controls.Add(this.txtMaSP);
-            this.groupBox2.Controls.Add(this.txtLoaiSP);
+            this.groupBox2.Controls.Add(this.txtGia);
             this.groupBox2.Controls.Add(this.txtTenSP);
             this.groupBox2.Controls.Add(this.txtSoLuong);
             this.groupBox2.Controls.Add(this.label10);
@@ -388,6 +362,42 @@
             this.label11.TabIndex = 26;
             this.label11.Text = "Tổng cộng:";
             // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Column1.HeaderText = "Mã sản phẩm";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 116;
+            // 
+            // Column2
+            // 
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column2.HeaderText = "Tên sản phẩm";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column3.HeaderText = "Giá";
+            this.Column3.Name = "Column3";
+            // 
+            // Column5
+            // 
+            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Column5.HeaderText = "Số lượng";
+            this.Column5.Name = "Column5";
+            this.Column5.Width = 89;
+            // 
+            // colXoa
+            // 
+            this.colXoa.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colXoa.HeaderText = "Xóa";
+            this.colXoa.Image = ((System.Drawing.Image)(resources.GetObject("colXoa.Image")));
+            this.colXoa.Name = "colXoa";
+            this.colXoa.Width = 41;
+            // 
             // frmLapPhieuDat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
@@ -424,7 +434,7 @@
 
         private System.Windows.Forms.Button btnThemSP;
         private System.Windows.Forms.TextBox txtMaSP;
-        private System.Windows.Forms.TextBox txtLoaiSP;
+        private System.Windows.Forms.TextBox txtGia;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.DataGridView dgvDanhSach;
         private System.Windows.Forms.TextBox txtTenSP;
@@ -446,12 +456,13 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewImageColumn colXoa;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtTongtien;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewImageColumn colXoa;
     }
 }

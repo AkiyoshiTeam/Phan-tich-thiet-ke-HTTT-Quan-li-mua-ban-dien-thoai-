@@ -15,6 +15,7 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
     public partial class frmLapPhieuDat : Form
     {
         int i;
+        int Tien;
         public frmLapPhieuDat()
         {
             InitializeComponent();
@@ -33,14 +34,17 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
         private void btnLapPhieuMoi_Click(object sender, EventArgs e)
         {
             i = 0;
+            Tien = 0;
+            txtTongtien.Text = "0";
             btnGhiPhieu.Enabled = true;
             btnLapPhieuMoi.Enabled = false;
             btnThemSP.Enabled = false;
+            cboNCC.Enabled = true;
             txtSoPĐ.Text = DonDatHangBUS.GetIDPhieuDat();
             txtMaSP.ResetText();
             txtTenSP.ResetText();
             txtSoLuong.ResetText();
-            txtLoaiSP.ResetText();
+            txtGia.ResetText();
             dtkNgayDat.Value = DateTime.Now;
             dgvDanhSach.Rows.Clear();
         }
@@ -57,7 +61,6 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
                 btnThemSP.Enabled = true;
                 btnGhiPhieu.Enabled = false;
                 cboNCC.Enabled = false;
-                btnIn.Enabled = true;
 
                 AutoCompleteStringCollection auto = new AutoCompleteStringCollection();
                 foreach (DataRow row in SanPhamBUS.DanhSachSPTheoNCC(cboNCC.SelectedValue.ToString()).Rows)
@@ -79,15 +82,30 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
                 foreach (DataRow row in SanPhamBUS.DanhSachSPTheoMa(txtMaSP.Text).Rows)
                 {
                     txtTenSP.Text = row["TenSanPham"].ToString();
-                    txtLoaiSP.Text = row["TenLoaiSanPham"].ToString();
+                    txtGia.Text = row["GiaMua"].ToString();
                 }
             }
             else
             {
                 txtTenSP.ResetText();
-                txtLoaiSP.ResetText();
+                txtGia.ResetText();
                 txtSoLuong.ResetText();
             }
+        }
+
+        void TongTien()
+        {
+            int TongTien = 0;
+            for (int k = 0; k < dgvDanhSach.Rows.Count; k++)
+            {
+                TongTien = TongTien + (DonDatHangBUS.TinhTongTien(Int32.Parse(dgvDanhSach.Rows[k].Cells[3].Value.ToString()), Int32.Parse(dgvDanhSach.Rows[k].Cells[2].Value.ToString())));
+            }
+            txtTongtien.Text = String.Format("{0:0,0}", TongTien);
+            Tien = TongTien;
+            if (Tien <= 40000000)
+                btnIn.Enabled = true;
+            else if (Tien > 40000000)
+                btnIn.Enabled = false;
         }
 
         private void btnThemSP_Click(object sender, EventArgs e)
@@ -95,12 +113,12 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
             int j = 0;
             ChiTietDonDatHangDTO CT = new ChiTietDonDatHangDTO();
             CT.MaSanPham = txtMaSP.Text;
-            if(txtSoLuong.Text=="")
+            if (txtSoLuong.Text=="")
                 CT.SoLuong = 0;
             else
                 CT.SoLuong = Int32.Parse(txtSoLuong.Text);
-            if (DonDatHangBUS.KiemTra(CT, txtTenSP.Text,txtLoaiSP.Text) != "")
-                MessageBox.Show(string.Format("{0}", DonDatHangBUS.KiemTra(CT, txtTenSP.Text, txtLoaiSP.Text)), "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (DonDatHangBUS.KiemTra(CT, txtTenSP.Text,txtGia.Text) != "")
+                MessageBox.Show(string.Format("{0}", DonDatHangBUS.KiemTra(CT, txtTenSP.Text, txtGia.Text)), "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
             {
                 // Đưa giá trị vào DataGridView
@@ -110,7 +128,7 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
                     {
                         if (txtMaSP.Text == dgvDanhSach.Rows[j].Cells[0].Value.ToString())
                         {
-                            dgvDanhSach.Rows[j].Cells[2].Value = (Int32.Parse(dgvDanhSach.Rows[j].Cells[2].Value.ToString()) + Int32.Parse(txtSoLuong.Text)).ToString();
+                            dgvDanhSach.Rows[j].Cells[3].Value = (Int32.Parse(dgvDanhSach.Rows[j].Cells[3].Value.ToString()) + Int32.Parse(txtSoLuong.Text)).ToString();
                             break;
                         }
                         else if (j == dgvDanhSach.Rows.Count - 1)
@@ -118,7 +136,8 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
                             dgvDanhSach.Rows.Add();
                             dgvDanhSach.Rows[i].Cells[0].Value = txtMaSP.Text;
                             dgvDanhSach.Rows[i].Cells[1].Value = txtTenSP.Text;
-                            dgvDanhSach.Rows[i].Cells[2].Value = txtSoLuong.Text;
+                            dgvDanhSach.Rows[i].Cells[2].Value = txtGia.Text;
+                            dgvDanhSach.Rows[i].Cells[3].Value = txtSoLuong.Text;
                             i++;
                             break;
                         }
@@ -130,15 +149,18 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
                     dgvDanhSach.Rows.Add();
                     dgvDanhSach.Rows[i].Cells[0].Value = txtMaSP.Text;
                     dgvDanhSach.Rows[i].Cells[1].Value = txtTenSP.Text;
-                    dgvDanhSach.Rows[i].Cells[2].Value = txtSoLuong.Text;
+                    dgvDanhSach.Rows[i].Cells[2].Value = txtGia.Text;
+                    dgvDanhSach.Rows[i].Cells[3].Value = txtSoLuong.Text;
                     i++;
                 }
+                // Tính tổng tiền
+                TongTien();
             }
         }
 
         private void dgvDanhSach_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 3)
+            if (e.ColumnIndex == 4)
             {
                 dgvDanhSach.Rows.RemoveAt(e.RowIndex);
             }
@@ -151,10 +173,13 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
                 ChiTietDonDatHangDTO PN = new ChiTietDonDatHangDTO();
                 PN.MaDonDatHang = txtSoPĐ.Text;
                 PN.MaSanPham = dgvDanhSach.Rows[k].Cells[0].Value.ToString();
-                PN.SoLuong = int.Parse(dgvDanhSach.Rows[k].Cells[2].Value.ToString());
+                PN.SoLuong = int.Parse(dgvDanhSach.Rows[k].Cells[3].Value.ToString());
                 if (DonDatHangBUS.ThemCTPD(PN) == true)
                 {
                     btnIn.Enabled = false;
+                    // Update tổng tiền.
+                    if (DonDatHangBUS.UpdateTT(txtSoPĐ.Text, Tien) == false)
+                        MessageBox.Show("Cập nhật tổng tiền thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                     MessageBox.Show("Thêm chi tiết phiếu đặt hàng thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -172,6 +197,16 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
             {
                 e.Handled = true;
             }
+        }
+
+        private void dgvDanhSach_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            TongTien();
+        }
+
+        private void btnThoat_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

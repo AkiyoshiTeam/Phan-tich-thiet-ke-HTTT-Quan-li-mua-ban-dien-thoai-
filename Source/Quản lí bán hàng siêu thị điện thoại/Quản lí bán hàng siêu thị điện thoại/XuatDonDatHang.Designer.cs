@@ -289,6 +289,10 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại {
             
             private global::System.Data.DataColumn columnSoLuong;
             
+            private global::System.Data.DataColumn columnGiaMua;
+            
+            private global::System.Data.DataColumn columnTongTien;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public dtDonDatHangDataTable() {
@@ -364,6 +368,22 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn GiaMuaColumn {
+                get {
+                    return this.columnGiaMua;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn TongTienColumn {
+                get {
+                    return this.columnTongTien;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -399,14 +419,16 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public dtDonDatHangRow AdddtDonDatHangRow(string MaDonDatHang, System.DateTime NgayLap, string MaSanPham, string TenSanPham, int SoLuong) {
+            public dtDonDatHangRow AdddtDonDatHangRow(string MaDonDatHang, System.DateTime NgayLap, string MaSanPham, string TenSanPham, int SoLuong, int GiaMua, int TongTien) {
                 dtDonDatHangRow rowdtDonDatHangRow = ((dtDonDatHangRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         MaDonDatHang,
                         NgayLap,
                         MaSanPham,
                         TenSanPham,
-                        SoLuong};
+                        SoLuong,
+                        GiaMua,
+                        TongTien};
                 rowdtDonDatHangRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdtDonDatHangRow);
                 return rowdtDonDatHangRow;
@@ -434,6 +456,8 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại {
                 this.columnMaSanPham = base.Columns["MaSanPham"];
                 this.columnTenSanPham = base.Columns["TenSanPham"];
                 this.columnSoLuong = base.Columns["SoLuong"];
+                this.columnGiaMua = base.Columns["GiaMua"];
+                this.columnTongTien = base.Columns["TongTien"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -449,6 +473,10 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại {
                 base.Columns.Add(this.columnTenSanPham);
                 this.columnSoLuong = new global::System.Data.DataColumn("SoLuong", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSoLuong);
+                this.columnGiaMua = new global::System.Data.DataColumn("GiaMua", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnGiaMua);
+                this.columnTongTien = new global::System.Data.DataColumn("TongTien", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTongTien);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -671,6 +699,38 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int GiaMua {
+                get {
+                    try {
+                        return ((int)(this[this.tabledtDonDatHang.GiaMuaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'GiaMua\' in table \'dtDonDatHang\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtDonDatHang.GiaMuaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int TongTien {
+                get {
+                    try {
+                        return ((int)(this[this.tabledtDonDatHang.TongTienColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TongTien\' in table \'dtDonDatHang\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtDonDatHang.TongTienColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsMaDonDatHangNull() {
                 return this.IsNull(this.tabledtDonDatHang.MaDonDatHangColumn);
             }
@@ -727,6 +787,30 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetSoLuongNull() {
                 this[this.tabledtDonDatHang.SoLuongColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsGiaMuaNull() {
+                return this.IsNull(this.tabledtDonDatHang.GiaMuaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetGiaMuaNull() {
+                this[this.tabledtDonDatHang.GiaMuaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsTongTienNull() {
+                return this.IsNull(this.tabledtDonDatHang.TongTienColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetTongTienNull() {
+                this[this.tabledtDonDatHang.TongTienColumn] = global::System.Convert.DBNull;
             }
         }
         

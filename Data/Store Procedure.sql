@@ -25,8 +25,8 @@ Create proc sp_ThemPD
 @ngaydat date
 as
 begin
-   Insert into DonDatHang(MaDonDatHang,NgayLap,MaTrangTrangThai)
-   values (@maddh,@ngaydat,0)
+   Insert into DonDatHang(MaDonDatHang,NgayLap,MaTrangTrangThai,TongTien)
+   values (@maddh,@ngaydat,0,0)
 end
 go
 -- Thêm chi tiết phiếu đặt --

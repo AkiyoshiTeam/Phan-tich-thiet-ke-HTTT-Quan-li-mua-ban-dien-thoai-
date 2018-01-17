@@ -16,5 +16,10 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
         {
             InitializeComponent();
         }
+
+        private void btnThoat_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

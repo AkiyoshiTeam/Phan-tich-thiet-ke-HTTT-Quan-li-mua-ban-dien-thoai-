@@ -77,6 +77,14 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
             dgvDanhSach.Columns.Add(dgvCol);
 
             dgvCol = new DataGridViewTextBoxColumn();
+            dgvCol.HeaderText = "Tổng tiền";
+            dgvCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvCol.DataPropertyName = "TongTien";
+            dgvCol.ReadOnly = true;
+            dgvCol.DefaultCellStyle.Format = "0,00";
+            dgvDanhSach.Columns.Add(dgvCol);
+
+            dgvCol = new DataGridViewTextBoxColumn();
             dgvCol.HeaderText = "Trạng thái";
             dgvCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvCol.DataPropertyName = "TenTrangThai";
@@ -137,6 +145,14 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
             dgvCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvCol.DataPropertyName = "SoLuong";
             dgvCol.ReadOnly = true;
+            dgvChiTiet.Columns.Add(dgvCol);
+
+            dgvCol = new DataGridViewTextBoxColumn();
+            dgvCol.HeaderText = "Giá";
+            dgvCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvCol.DataPropertyName = "GiaMua";
+            dgvCol.ReadOnly = true;
+            dgvCol.DefaultCellStyle.Format = "0,00";
             dgvChiTiet.Columns.Add(dgvCol);
         }
 

@@ -59,5 +59,17 @@ namespace BUS
         {
             return DonDatHangDAO.XoaPD(MaDDH);
         }
+
+        public static int TinhTongTien(int SoLuong, int Gia)
+        {
+            int Tong = 0;
+            Tong = SoLuong * Gia;
+            return Tong;
+        }
+
+        public static bool UpdateTT(string MaDDH, int TongTien)
+        {
+            return DonDatHangDAO.UpdateTT(MaDDH, TongTien);
+        }
     }
 }
