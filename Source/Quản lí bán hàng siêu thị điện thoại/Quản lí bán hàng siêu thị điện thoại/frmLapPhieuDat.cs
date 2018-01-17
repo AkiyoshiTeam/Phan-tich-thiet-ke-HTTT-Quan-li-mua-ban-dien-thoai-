@@ -165,5 +165,13 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
             frm.ShowDialog();
             this.Show();
         }
+
+        private void txtSoLuong_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

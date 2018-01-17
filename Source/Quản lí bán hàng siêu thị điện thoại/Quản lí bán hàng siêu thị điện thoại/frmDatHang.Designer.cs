@@ -32,8 +32,6 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbtnLapphieu = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbtnUpdate = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbtnXoa = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbtnThoat = new System.Windows.Forms.ToolStripButton();
@@ -56,8 +54,6 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbtnLapphieu,
             this.toolStripSeparator1,
-            this.tsbtnUpdate,
-            this.toolStripSeparator3,
             this.tsbtnXoa,
             this.toolStripSeparator2,
             this.tsbtnThoat});
@@ -83,21 +79,6 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 75);
-            // 
-            // tsbtnUpdate
-            // 
-            this.tsbtnUpdate.Image = ((System.Drawing.Image)(resources.GetObject("tsbtnUpdate.Image")));
-            this.tsbtnUpdate.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsbtnUpdate.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbtnUpdate.Name = "tsbtnUpdate";
-            this.tsbtnUpdate.Size = new System.Drawing.Size(68, 72);
-            this.tsbtnUpdate.Text = "Cập nhật";
-            this.tsbtnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 75);
             // 
             // tsbtnXoa
             // 
@@ -213,7 +194,5 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dgvChiTiet;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ToolStripButton tsbtnUpdate;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     }
 }

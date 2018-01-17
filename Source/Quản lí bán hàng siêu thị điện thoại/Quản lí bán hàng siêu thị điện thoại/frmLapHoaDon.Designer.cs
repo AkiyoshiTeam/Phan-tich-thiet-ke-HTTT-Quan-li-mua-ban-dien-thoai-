@@ -454,6 +454,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmLapHoaDon";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Lập hóa đơn";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

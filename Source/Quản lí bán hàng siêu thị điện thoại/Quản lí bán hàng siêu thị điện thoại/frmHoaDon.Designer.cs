@@ -55,15 +55,18 @@
             this.dgvDanhSach.MultiSelect = false;
             this.dgvDanhSach.Name = "dgvDanhSach";
             this.dgvDanhSach.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDanhSach.Size = new System.Drawing.Size(448, 575);
+            this.dgvDanhSach.Size = new System.Drawing.Size(1314, 257);
             this.dgvDanhSach.TabIndex = 5;
+            this.dgvDanhSach.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDanhSach_CellClick);
+            this.dgvDanhSach.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvDanhSach_KeyDown);
+            this.dgvDanhSach.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dgvDanhSach_KeyUp);
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.dgvChiTiet);
-            this.groupBox2.Location = new System.Drawing.Point(478, 84);
+            this.groupBox2.Location = new System.Drawing.Point(18, 378);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(867, 606);
+            this.groupBox2.Size = new System.Drawing.Size(1320, 306);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Chi tiết hóa đơn";
@@ -77,7 +80,7 @@
             this.dgvChiTiet.MultiSelect = false;
             this.dgvChiTiet.Name = "dgvChiTiet";
             this.dgvChiTiet.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvChiTiet.Size = new System.Drawing.Size(854, 575);
+            this.dgvChiTiet.Size = new System.Drawing.Size(1308, 275);
             this.dgvChiTiet.TabIndex = 6;
             // 
             // groupBox1
@@ -85,7 +88,7 @@
             this.groupBox1.Controls.Add(this.dgvDanhSach);
             this.groupBox1.Location = new System.Drawing.Point(12, 84);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(460, 606);
+            this.groupBox1.Size = new System.Drawing.Size(1326, 288);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Hóa đơn";
@@ -117,6 +120,7 @@
             this.tsbtnLapphieu.Size = new System.Drawing.Size(90, 72);
             this.tsbtnLapphieu.Text = "Lập hóa đơn";
             this.tsbtnLapphieu.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsbtnLapphieu.Click += new System.EventHandler(this.tsbtnLapphieu_Click);
             // 
             // toolStripSeparator1
             // 
@@ -161,11 +165,12 @@
             this.Controls.Add(this.toolStrip1);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmHoaDon";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hóa đơn";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.frmHoaDon_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDanhSach)).EndInit();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvChiTiet)).EndInit();

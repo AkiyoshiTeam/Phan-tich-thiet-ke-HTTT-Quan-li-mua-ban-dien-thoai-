@@ -49,4 +49,5 @@ begin
    Delete from DonDatHang Where MaDonDatHang=@maddh
 end
 go
+-- 
 

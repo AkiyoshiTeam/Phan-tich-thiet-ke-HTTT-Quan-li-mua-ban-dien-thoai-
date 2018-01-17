@@ -57,6 +57,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtTongtien = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDanhSach)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -178,6 +181,7 @@
             this.txtSoLuong.Name = "txtSoLuong";
             this.txtSoLuong.Size = new System.Drawing.Size(136, 26);
             this.txtSoLuong.TabIndex = 6;
+            this.txtSoLuong.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSoLuong_KeyPress);
             // 
             // groupBox1
             // 
@@ -357,11 +361,41 @@
             this.label10.TabIndex = 5;
             this.label10.Text = "Số lượng:";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(758, 608);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(43, 19);
+            this.label12.TabIndex = 28;
+            this.label12.Text = "VNĐ";
+            // 
+            // txtTongtien
+            // 
+            this.txtTongtien.Location = new System.Drawing.Point(541, 605);
+            this.txtTongtien.Name = "txtTongtien";
+            this.txtTongtien.ReadOnly = true;
+            this.txtTongtien.Size = new System.Drawing.Size(211, 26);
+            this.txtTongtien.TabIndex = 27;
+            this.txtTongtien.TabStop = false;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(459, 608);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(76, 19);
+            this.label11.TabIndex = 26;
+            this.label11.Text = "Tổng cộng:";
+            // 
             // frmLapPhieuDat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(810, 640);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.txtTongtien);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.groupBox1);
@@ -382,6 +416,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -415,5 +450,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewImageColumn colXoa;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txtTongtien;
+        private System.Windows.Forms.Label label11;
     }
 }
