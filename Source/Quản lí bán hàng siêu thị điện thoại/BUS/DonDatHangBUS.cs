@@ -71,5 +71,10 @@ namespace BUS
         {
             return DonDatHangDAO.UpdateTT(MaDDH, TongTien);
         }
+
+        public static DataTable DanhSachDDHTheoMaPG(string MaPG)
+        {
+            return DonDatHangDAO.DanhSachDDHTheoMaPG(MaPG);
+        }
     }
 }

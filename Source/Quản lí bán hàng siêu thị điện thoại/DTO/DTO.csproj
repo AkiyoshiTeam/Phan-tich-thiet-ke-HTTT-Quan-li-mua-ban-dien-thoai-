@@ -42,9 +42,11 @@
   <ItemGroup>
     <Compile Include="ChiTietDonDatHangDTO.cs" />
     <Compile Include="ChiTietHoaDonBanHangDTO.cs" />
+    <Compile Include="ChiTietPhieuGiaoHangDTO.cs" />
     <Compile Include="DonDatHangDTO.cs" />
     <Compile Include="HoaDonBanHangDTO.cs" />
     <Compile Include="NhaCungCapDTO.cs" />
+    <Compile Include="PhieuGiaoHangDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

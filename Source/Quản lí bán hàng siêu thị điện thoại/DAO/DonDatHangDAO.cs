@@ -145,5 +145,18 @@ namespace DAO
                 return false;
             }
         }
+
+        public static DataTable DanhSachDDHTheoMaPG(string MaPG)
+        {
+            SqlConnection con = DataProvider.Connection();
+            DataTable dt = new DataTable();
+            string sql = @"Select D.MaDonDatHang,D.NgayLap,D.TongTien, T.TenTrangThai " +
+                          "From (DonDatHang D join PhieuGiaoHang P on D.MaDonDatHang=P.MaDonDatHang) join TrangThaiDonDatHang T on D.MaTrangTrangThai=T.MaTrangThaiDonDatHang " +
+                          "Where P.MaPhieuGiaoHang =" + "'" + MaPG + "' and (T.TenTrangThai=N'Chưa nhận hàng đủ' or T.TenTrangThai=N'Đã thanh toán')";
+            SqlDataAdapter da = new SqlDataAdapter(sql, con);
+            da.Fill(dt);
+            con.Close();
+            return dt;
+        }
     }
 }

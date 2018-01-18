@@ -115,5 +115,14 @@ begin
    Update SanPham set SoLuongTon=@soluongton where MaSanPham=@masp
 end
 go
+-- Xóa phiếu giao hàng --
+Create proc sp_XoaPG
+@mapg nchar(10)
+as
+begin
+   Delete from ChiTietPhieuGiaoHang Where MaPhieuGiao=@mapg
+   Delete from PhieuGiaoHang Where MaPhieuGiaoHang=@mapg
+end
+go
 --
 

@@ -184,6 +184,8 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
                 Custom2();
                 dgvChiTiet.ClearSelection();
             }
+            else
+                dgvChiTiet.DataSource = null;
         }
 
         private void tsbtnXoa_Click(object sender, EventArgs e)
