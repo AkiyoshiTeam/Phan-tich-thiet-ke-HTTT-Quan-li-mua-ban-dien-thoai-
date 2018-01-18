@@ -11,6 +11,11 @@ namespace BUS
 {
     public class DonDatHangBUS
     {
+        public static DataTable DanhSachTTPD()
+        {
+            return DonDatHangDAO.DanhSachTTPD();
+        }
+
         public static DataTable DanhSachPD()
         {
             return DonDatHangDAO.DanhSachPD();
@@ -31,7 +36,7 @@ namespace BUS
             return DonDatHangDAO.ThemPD(DDH);
         }
 
-        public static string KiemTra(ChiTietDonDatHangDTO CT, string TenSP, string LoaiSP)
+        public static string KiemTra(ChiTietDonDatHangDTO CT, string TenSP, string GiaSP)
         {
             string thongbao = "";
             if (CT.MaSanPham == "")
@@ -40,8 +45,8 @@ namespace BUS
                 thongbao += "-Số lượng không được để trống.\n";
             if (TenSP =="")
                 thongbao += "-Tên sản phẩm không được để trống.\n";
-            if(LoaiSP=="")
-                thongbao += "-Loại sản phẩm không được để trống.\n";
+            if(GiaSP=="")
+                thongbao += "-Giá sản phẩm không được để trống.\n";
             return thongbao;
         }
 
@@ -75,6 +80,16 @@ namespace BUS
         public static DataTable DanhSachDDHTheoMaPG(string MaPG)
         {
             return DonDatHangDAO.DanhSachDDHTheoMaPG(MaPG);
+        }
+
+        public static DataTable DanhSachPDCoTrangThaiDaXacNhanVaChuaNhanHangDu()
+        {
+            return DonDatHangDAO.DanhSachPDCoTrangThaiDaXacNhanVaChuaNhanHangDu();
+        }
+
+        public static bool UpdateTrangThai(string MaDDH, int MaTT)
+        {
+            return DonDatHangDAO.UpdateTrangThai(MaDDH, MaTT);
         }
     }
 }

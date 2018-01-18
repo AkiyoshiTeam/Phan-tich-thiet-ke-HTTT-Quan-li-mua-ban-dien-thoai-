@@ -11,6 +11,17 @@ namespace DAO
 {
     public class DonDatHangDAO
     {
+        public static DataTable DanhSachTTPD()
+        {
+            SqlConnection con = DataProvider.Connection();
+            DataTable dt = new DataTable();
+            string sql = @"Select * From TrangThaiDonDatHang where MaTrangThaiDonDatHang between 1 and 3";
+            SqlDataAdapter da = new SqlDataAdapter(sql, con);
+            da.Fill(dt);
+            con.Close();
+            return dt;
+        }
+
         public static DataTable DanhSachPD()
         {
             SqlConnection con = DataProvider.Connection();
@@ -150,13 +161,43 @@ namespace DAO
         {
             SqlConnection con = DataProvider.Connection();
             DataTable dt = new DataTable();
-            string sql = @"Select D.MaDonDatHang,D.NgayLap,D.TongTien, T.TenTrangThai " +
+            string sql = @"Select D.MaDonDatHang,D.NgayLap,D.TongTien, D.MaTrangTrangThai " +
                           "From (DonDatHang D join PhieuGiaoHang P on D.MaDonDatHang=P.MaDonDatHang) join TrangThaiDonDatHang T on D.MaTrangTrangThai=T.MaTrangThaiDonDatHang " +
-                          "Where P.MaPhieuGiaoHang =" + "'" + MaPG + "' and (T.TenTrangThai=N'Chưa nhận hàng đủ' or T.TenTrangThai=N'Đã thanh toán')";
+                          "Where P.MaPhieuGiaoHang =" + "'" + MaPG + "' and (T.TenTrangThai=N'Chưa nhận hàng đủ' or T.TenTrangThai=N'Đã thanh toán' or T.TenTrangThai= N'Đã xác nhận')";
             SqlDataAdapter da = new SqlDataAdapter(sql, con);
             da.Fill(dt);
             con.Close();
             return dt;
+        }
+
+        public static DataTable DanhSachPDCoTrangThaiDaXacNhanVaChuaNhanHangDu()
+        {
+            SqlConnection con = DataProvider.Connection();
+            DataTable dt = new DataTable();
+            string sql = @"Select D.MaDonDatHang" +
+                           " From DonDatHang D join TrangThaiDonDatHang T on D.MaTrangTrangThai = T.MaTrangThaiDonDatHang" +
+                           " Where T.TenTrangThai= N'Chưa nhận hàng đủ' or T.TenTrangThai= N'Đã xác nhận'";
+            SqlDataAdapter da = new SqlDataAdapter(sql, con);
+            da.Fill(dt);
+            con.Close();
+            return dt;
+        }
+
+        public static bool UpdateTrangThai(string MaDDH, int MaTT)
+        {
+            try
+            {
+                SqlConnection con = DataProvider.Connection();
+                string sql = @"Update DonDatHang set MaTrangTrangThai='" + MaTT.ToString() + "' Where MaDonDatHang='" + MaDDH + "'";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.ExecuteNonQuery();
+                con.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

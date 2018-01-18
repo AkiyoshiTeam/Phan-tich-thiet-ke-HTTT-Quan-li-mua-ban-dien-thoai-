@@ -161,7 +161,7 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
 
             dgvCol = new DataGridViewTextBoxColumn();
             dgvCol.HeaderText = "Ngày lập";
-            dgvCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvCol.DataPropertyName = "NgayLap";
             dgvCol.ReadOnly = true;
             dgvDanhSachPD.Columns.Add(dgvCol);
@@ -174,12 +174,15 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
             dgvCol.DefaultCellStyle.Format = "0,00";
             dgvDanhSachPD.Columns.Add(dgvCol);
 
-            dgvCol = new DataGridViewTextBoxColumn();
-            dgvCol.HeaderText = "Trạng thái";
-            dgvCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvCol.DataPropertyName = "TenTrangThai";
-            dgvCol.ReadOnly = true;
-            dgvDanhSachPD.Columns.Add(dgvCol);
+            DataGridViewComboBoxColumn dgvCo = new DataGridViewComboBoxColumn();
+            dgvCo.HeaderText = "Trạng thái";
+            dgvCo.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvCo.DataSource = DonDatHangBUS.DanhSachTTPD();
+            dgvCo.DisplayMember = "TenTrangThai";
+            dgvCo.ValueMember = "MaTrangThaiDonDatHang";
+            dgvCo.DataPropertyName = "MaTrangTrangThai";
+            dgvCo.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+            dgvDanhSachPD.Columns.Add(dgvCo);
         }
 
         void Custom4()
@@ -261,6 +264,14 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
             frmLapPhieuGiaoHang frm = new frmLapPhieuGiaoHang();
             frm.ShowDialog();
             LoadData();
+        }
+
+        private void dgvDanhSachPD_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if(DonDatHangBUS.UpdateTrangThai(dgvDanhSachPD.CurrentRow.Cells[0].Value.ToString(),Int32.Parse(dgvDanhSachPD.CurrentRow.Cells[3].Value.ToString()))== false)
+            {
+                MessageBox.Show("Cập nhật trạng thái thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

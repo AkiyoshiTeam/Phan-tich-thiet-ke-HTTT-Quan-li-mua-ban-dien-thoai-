@@ -38,6 +38,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtMaPGNCC = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.btnIn = new System.Windows.Forms.Button();
             this.btnLapPhieuMoi = new System.Windows.Forms.Button();
             this.cboMaDH = new System.Windows.Forms.ComboBox();
@@ -55,8 +57,6 @@
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colXoa = new System.Windows.Forms.DataGridViewImageColumn();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtMaPGNCC = new System.Windows.Forms.TextBox();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -100,6 +100,7 @@
             this.btnThemSP.Text = "Thêm sản phẩm";
             this.btnThemSP.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThemSP.UseVisualStyleBackColor = true;
+            this.btnThemSP.Click += new System.EventHandler(this.btnThemSP_Click);
             // 
             // txtMaSP
             // 
@@ -108,6 +109,7 @@
             this.txtMaSP.Size = new System.Drawing.Size(136, 26);
             this.txtMaSP.TabIndex = 10;
             this.txtMaSP.TabStop = false;
+            this.txtMaSP.TextChanged += new System.EventHandler(this.txtMaSP_TextChanged);
             // 
             // txtTenSP
             // 
@@ -123,6 +125,7 @@
             this.txtSoLuong.Name = "txtSoLuong";
             this.txtSoLuong.Size = new System.Drawing.Size(136, 26);
             this.txtSoLuong.TabIndex = 6;
+            this.txtSoLuong.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSoLuong_KeyPress);
             // 
             // label7
             // 
@@ -162,6 +165,25 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin phiếu giao hàng";
             // 
+            // txtMaPGNCC
+            // 
+            this.txtMaPGNCC.Location = new System.Drawing.Point(417, 71);
+            this.txtMaPGNCC.Name = "txtMaPGNCC";
+            this.txtMaPGNCC.ReadOnly = true;
+            this.txtMaPGNCC.Size = new System.Drawing.Size(131, 26);
+            this.txtMaPGNCC.TabIndex = 7;
+            this.txtMaPGNCC.TabStop = false;
+            this.txtMaPGNCC.TextChanged += new System.EventHandler(this.txtMaPGNCC_TextChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(275, 74);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(136, 19);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Mã phiếu giao NCC:";
+            // 
             // btnIn
             // 
             this.btnIn.Enabled = false;
@@ -174,6 +196,7 @@
             this.btnIn.Text = "Lưu và In";
             this.btnIn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnIn.UseVisualStyleBackColor = true;
+            this.btnIn.Click += new System.EventHandler(this.btnIn_Click);
             // 
             // btnLapPhieuMoi
             // 
@@ -186,12 +209,13 @@
             this.btnLapPhieuMoi.Text = "Lập phiếu mới";
             this.btnLapPhieuMoi.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLapPhieuMoi.UseVisualStyleBackColor = true;
+            this.btnLapPhieuMoi.Click += new System.EventHandler(this.btnLapPhieuMoi_Click);
             // 
             // cboMaDH
             // 
             this.cboMaDH.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboMaDH.FormattingEnabled = true;
-            this.cboMaDH.Location = new System.Drawing.Point(367, 29);
+            this.cboMaDH.Location = new System.Drawing.Point(373, 29);
             this.cboMaDH.Name = "cboMaDH";
             this.cboMaDH.Size = new System.Drawing.Size(175, 27);
             this.cboMaDH.TabIndex = 5;
@@ -217,6 +241,7 @@
             this.btnGhiPhieu.Text = "Ghi phiếu ";
             this.btnGhiPhieu.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnGhiPhieu.UseVisualStyleBackColor = true;
+            this.btnGhiPhieu.Click += new System.EventHandler(this.btnGhiPhieu_Click);
             // 
             // txtSoPG
             // 
@@ -239,7 +264,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(269, 32);
+            this.label3.Location = new System.Drawing.Point(275, 32);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(92, 19);
             this.label3.TabIndex = 1;
@@ -304,6 +329,7 @@
             this.dgvDanhSach.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDanhSach.Size = new System.Drawing.Size(762, 247);
             this.dgvDanhSach.TabIndex = 3;
+            this.dgvDanhSach.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDanhSach_CellClick);
             // 
             // Column1
             // 
@@ -335,23 +361,6 @@
             this.colXoa.Name = "colXoa";
             this.colXoa.Width = 41;
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(269, 74);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(136, 19);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "Mã phiếu giao NCC:";
-            // 
-            // txtMaPGNCC
-            // 
-            this.txtMaPGNCC.Location = new System.Drawing.Point(411, 71);
-            this.txtMaPGNCC.Name = "txtMaPGNCC";
-            this.txtMaPGNCC.Size = new System.Drawing.Size(131, 26);
-            this.txtMaPGNCC.TabIndex = 7;
-            this.txtMaPGNCC.TabStop = false;
-            // 
             // frmLapPhieuGiaoHang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
@@ -370,6 +379,7 @@
             this.Name = "frmLapPhieuGiaoHang";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Lập phiếu giao hàng";
+            this.Load += new System.EventHandler(this.frmLapPhieuGiaoHang_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);

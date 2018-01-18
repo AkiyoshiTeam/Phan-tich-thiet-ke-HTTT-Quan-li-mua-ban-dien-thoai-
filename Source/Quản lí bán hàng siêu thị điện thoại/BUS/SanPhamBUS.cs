@@ -19,5 +19,10 @@ namespace BUS
         {
             return SanPhamDAO.DanhSachSPTheoMa(maSP);
         }
+
+        public static DataTable DanhSachSPTheoDDH(string maDH)
+        {
+            return SanPhamDAO.DanhSachSPTheoDDH(maDH);
+        }
     }
 }

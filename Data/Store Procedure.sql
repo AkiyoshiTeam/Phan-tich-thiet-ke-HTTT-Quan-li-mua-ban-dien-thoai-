@@ -124,5 +124,61 @@ begin
    Delete from PhieuGiaoHang Where MaPhieuGiaoHang=@mapg
 end
 go
+-- Get ID Phiếu giao hàng --
+Create proc sp_GetIDPhieuGiao
+@mapg nchar(10) output
+as
+begin
+   declare @n numeric
+   declare @Z nchar(2),@W nchar(5)
+   set @Z='PG'   
+   if exists (Select top 1 * From PhieuGiaoHang)
+       Select @n= max(cast(Substring(MaPhieuGiaoHang,3,5) as numeric)) From PhieuGiaoHang
+   else
+       set @n = 0
+   set @n=@n+1
+   set @W = cast(@n as nchar(5))
+   While len(@W)<5
+      set @W='0'+@W
+   set @mapg = @Z+@W
+end
+go
+-- Thêm phiếu giao --
+Create proc sp_ThemPG
+@mapg varchar(10),
+@ngaygiao date,
+@madh varchar(10),
+@mapgncc varchar(10)
+as
+begin
+   insert into PhieuGiaoHang(MaPhieuGiaoHang,NgayGiao,MaDonDatHang,MaPhieuGiaoHangNhaCC)
+   values(@mapg,@ngaygiao,@madh,@mapgncc)
+end
+go
+-- Thêm chi tiết phiếu giao hàng --
+Create proc sp_ThemCTPG
+@mapg varchar(10),
+@masp varchar(10),
+@soluong int
+as
+begin
+   insert into ChiTietPhieuGiaoHang(MaPhieuGiao,MaSanPham,SoLuong)
+   values(@mapg,@masp,@soluong)
+end
+go
+-- Update số lượng hàng tồn sau khi nhận hàng --
+Create proc sp_UpdateSLTsaunhanhang
+@masp varchar(10),
+@soluongnhap int
+as
+begin
+   -- lấy số lượng tồn ban đầu + số lượng nhập --
+   declare @soluongton int
+   select @soluongton= SoLuongTon
+   from SanPham
+   where MaSanPham=@masp
+   set @soluongton=@soluongton+@soluongnhap
+   Update SanPham set SoLuongTon=@soluongton where MaSanPham=@masp
+end
+go
 --
-
