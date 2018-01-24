@@ -35,7 +35,7 @@ namespace BUS
         {
             return HoaDonBanHangDAO.XoaHD(MaHD);
         }
-
+        // Kiểm tra thông tin.
         public static string KiemTra(ChiTietHoaDonBanHangDTO CT)
         {
             string thongbao = "";
@@ -45,7 +45,7 @@ namespace BUS
                 thongbao += "-Số lượng không được để trống.\n";
             return thongbao;
         }
-
+        // Kiểm tra thông tin chi tiết hóa đơn.
         public static string KiemTraChiTietHoaDon(int count)
         {
             string thongbao = "";
@@ -53,7 +53,7 @@ namespace BUS
                 thongbao += "- Chưa có thêm sản phẩm vào chi tiết hóa đơn.\n";
             return thongbao;
         }
-
+        // Tính tổng tiền.
         public static int TinhTongTien(int SoLuong, int Gia)
         {
             int Tong = 0;

@@ -14,7 +14,7 @@ namespace BUS
         {
             return KhachHangDAO.LoadKhachHangTheoMa(MaKH);
         }
-
+        // Kiểm tra khách hàng tồn tại.
         public static bool KiemTraKH(string MaKH)
         {
             DataTable dt = LoadKhachHangTheoMa(MaKH);
@@ -23,7 +23,7 @@ namespace BUS
             else
                 return false;
         }
-
+        // Kiểm tra cấp độ giảm giá theo điểm khách hàng.
         public static string CapDoGiamGia(string MaKH)
         {
             string capdo = "";
@@ -46,7 +46,7 @@ namespace BUS
                 capdo = "5";
             return capdo;
         }
-
+        // Kiểm tra để cộng điểm theo giá trị hóa đơn.
         public static int Congdiem(int TongTien)
         {
             int diem = 0;

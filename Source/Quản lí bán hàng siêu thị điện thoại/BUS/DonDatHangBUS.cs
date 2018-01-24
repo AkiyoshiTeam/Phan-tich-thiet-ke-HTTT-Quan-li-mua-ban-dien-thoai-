@@ -35,7 +35,7 @@ namespace BUS
         {
             return DonDatHangDAO.ThemPD(DDH);
         }
-
+        // Kiểm tra thông tin.
         public static string KiemTra(ChiTietDonDatHangDTO CT, string TenSP, string GiaSP)
         {
             string thongbao = "";
@@ -49,7 +49,7 @@ namespace BUS
                 thongbao += "-Giá sản phẩm không được để trống.\n";
             return thongbao;
         }
-
+        // Kiểm tra thông tin chi tiết đơn đặt hàng.
         public static string KiemTraChiTietDonDatHang(int count)
         {
             string thongbao = "";
@@ -57,7 +57,7 @@ namespace BUS
                 thongbao += "- Chưa có thêm sản phẩm vào chi tiết đơn đặt hàng.\n";
             return thongbao;
         }
-
+        // kiểm tra số lượng hàng giữa đơn đặt hàng và phiếu giao hàng để cập nhật trạng thái.
         public static int KiemTraSLHang(string MaDDH)
         {
             int flag = 0;
@@ -95,7 +95,7 @@ namespace BUS
         {
             return DonDatHangDAO.XoaPD(MaDDH);
         }
-
+        // Tính tổng tiền.
         public static int TinhTongTien(int SoLuong, int Gia)
         {
             int Tong = 0;

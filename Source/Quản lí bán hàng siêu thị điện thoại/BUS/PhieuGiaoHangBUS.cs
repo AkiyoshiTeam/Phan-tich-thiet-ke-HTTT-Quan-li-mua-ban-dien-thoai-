@@ -35,7 +35,7 @@ namespace BUS
         {
             return PhieuGiaoHangDAO.ThemPG(PG);
         }
-
+        // Kiểm tra thông tin.
         public static string KiemTra(ChiTietPhieuGiaoHangDTO CT, string TenSP)
         {
             string thongbao = "";
@@ -47,7 +47,7 @@ namespace BUS
                 thongbao += "-Tên sản phẩm không được để trống.\n";
             return thongbao;
         }
-
+        // Kiểm tra thông tin chi tiết phiếu giao.
         public static string KiemTraChiTietPhieuGiao(int count)
         {
             string thongbao = "";
