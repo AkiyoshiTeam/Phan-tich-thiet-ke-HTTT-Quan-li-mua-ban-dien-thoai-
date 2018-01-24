@@ -199,5 +199,18 @@ namespace DAO
                 return false;
             }
         }
+
+        public static DataTable TongSLHangDDH(string MaDDH)
+        {
+            SqlConnection con = DataProvider.Connection();
+            DataTable dt = new DataTable();
+            string sql = @"Select SUM(C.SoLuong) as 'TongSLHangDDH' " +
+                          "From DonDatHang D join ChiTietDonDatHang C on D.MaDonDatHang=C.MaDonDatHang " +
+                          "Where D.MaDonDatHang =" + "'" + MaDDH + "'";
+            SqlDataAdapter da = new SqlDataAdapter(sql, con);
+            da.Fill(dt);
+            con.Close();
+            return dt;
+        }
     }
 }

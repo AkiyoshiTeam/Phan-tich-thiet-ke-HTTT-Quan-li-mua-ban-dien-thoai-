@@ -33,50 +33,33 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
             dgvDanhSach.AllowUserToAddRows = false;
             dtkNgayGiao.Value = DateTime.Now;
             dgvDanhSach.Rows.Clear();
+            btnLapPhieuMoi.Enabled = false;
+            txtMaPGNCC.ReadOnly = false;
         }
 
         private void btnLapPhieuMoi_Click(object sender, EventArgs e)
         {
             i = 0;
             btnLapPhieuMoi.Enabled = false;
-            btnThemSP.Enabled = false;
-            cboMaDH.Enabled = true;
-            txtMaPGNCC.ReadOnly = false;
+            btnThemSP.Enabled = true;
+            btnIn.Enabled = true;
+            cboMaDH.Enabled = false;
+            txtMaPGNCC.ReadOnly = true;
             txtSoPG.Text = PhieuGiaoHangBUS.GetIDPhieuGiao();
             txtMaSP.ResetText();
             txtTenSP.ResetText();
             txtSoLuong.ResetText();
             dtkNgayGiao.Value = DateTime.Now;
             dgvDanhSach.Rows.Clear();
-        }
-
-        private void btnGhiPhieu_Click(object sender, EventArgs e)
-        {
-            PhieuGiaoHangDTO PG = new PhieuGiaoHangDTO();
-            PG.MaPhieuGiaoHang = txtSoPG.Text;
-            PG.NgayGiao = dtkNgayGiao.Value;
-            PG.MaDonDatHang = cboMaDH.SelectedValue.ToString();
-            PG.MaPhieuGiaoHangNhaCC = txtMaPGNCC.Text;
-            txtMaPGNCC.ReadOnly = true;
-
-            if (PhieuGiaoHangBUS.ThemPG(PG) == true)
+            // Thêm vào auto complete.
+            AutoCompleteStringCollection auto = new AutoCompleteStringCollection();
+            foreach (DataRow row in SanPhamBUS.DanhSachSPTheoDDH(cboMaDH.SelectedValue.ToString()).Rows)
             {
-                btnLapPhieuMoi.Enabled = true;
-                btnThemSP.Enabled = true;
-                btnGhiPhieu.Enabled = false;
-                cboMaDH.Enabled = false;
-
-                AutoCompleteStringCollection auto = new AutoCompleteStringCollection();
-                foreach (DataRow row in SanPhamBUS.DanhSachSPTheoDDH(cboMaDH.SelectedValue.ToString()).Rows)
-                {
-                    auto.Add(row["MaSanPham"].ToString());
-                }
-                txtMaSP.AutoCompleteMode = AutoCompleteMode.Suggest;
-                txtMaSP.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                txtMaSP.AutoCompleteCustomSource = auto;
+                auto.Add(row["MaSanPham"].ToString());
             }
-            else
-                MessageBox.Show("Thêm phiếu giao hàng thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            txtMaSP.AutoCompleteMode = AutoCompleteMode.Suggest;
+            txtMaSP.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            txtMaSP.AutoCompleteCustomSource = auto;
         }
 
         private void txtMaSP_TextChanged(object sender, EventArgs e)
@@ -161,36 +144,56 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
 
         private void btnIn_Click(object sender, EventArgs e)
         {
-            for (int k = 0; k < dgvDanhSach.Rows.Count; k++)
+            if (PhieuGiaoHangBUS.KiemTraChiTietPhieuGiao(dgvDanhSach.RowCount) == "")
             {
-                ChiTietPhieuGiaoHangDTO CT = new ChiTietPhieuGiaoHangDTO();
-                CT.MaPhieuGiao = txtSoPG.Text;
-                CT.MaSanPham = dgvDanhSach.Rows[k].Cells[0].Value.ToString();
-                CT.SoLuong = int.Parse(dgvDanhSach.Rows[k].Cells[2].Value.ToString());
-                if (PhieuGiaoHangBUS.ThemCTPG(CT) == true)
+                // Thêm phiếu giao mới.
+                PhieuGiaoHangDTO PG = new PhieuGiaoHangDTO();
+                PG.MaPhieuGiaoHang = txtSoPG.Text;
+                PG.NgayGiao = dtkNgayGiao.Value;
+                PG.MaDonDatHang = cboMaDH.SelectedValue.ToString();
+                PG.MaPhieuGiaoHangNhaCC = txtMaPGNCC.Text;
+                txtMaPGNCC.ReadOnly = false;
+                if (PhieuGiaoHangBUS.ThemPG(PG) == true)
                 {
-                    // Update số lượng tồn.
-                    if (PhieuGiaoHangBUS.UpdateSLTsaunhanhang(dgvDanhSach.Rows[k].Cells[0].Value.ToString(), int.Parse(dgvDanhSach.Rows[k].Cells[2].Value.ToString())) == false)
-                        MessageBox.Show("Cập nhật số lượng tồn thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    btnLapPhieuMoi.Enabled = true;
+                    cboMaDH.Enabled = true;
+                    // Thêm chi tiết phiếu giao.
+                    for (int k = 0; k < dgvDanhSach.Rows.Count; k++)
+                    {
+                        ChiTietPhieuGiaoHangDTO CT = new ChiTietPhieuGiaoHangDTO();
+                        CT.MaPhieuGiao = txtSoPG.Text;
+                        CT.MaSanPham = dgvDanhSach.Rows[k].Cells[0].Value.ToString();
+                        CT.SoLuong = int.Parse(dgvDanhSach.Rows[k].Cells[2].Value.ToString());
+                        if (PhieuGiaoHangBUS.ThemCTPG(CT) == true)
+                        {
+                            // Update số lượng tồn.
+                            if (PhieuGiaoHangBUS.UpdateSLTsaunhanhang(dgvDanhSach.Rows[k].Cells[0].Value.ToString(), int.Parse(dgvDanhSach.Rows[k].Cells[2].Value.ToString())) == false)
+                                MessageBox.Show("Cập nhật số lượng tồn thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else
+                            MessageBox.Show("Thêm chi tiết phiếu giao hàng thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    btnIn.Enabled = false;
+                    btnThemSP.Enabled = false;
+                    // Xuất ra cystal report
+                    frmXuatPhieuGiaoHang frm = new frmXuatPhieuGiaoHang(txtSoPG.Text);
+                    this.Hide();
+                    frm.ShowDialog();
+                    this.Show();
                 }
                 else
-                    MessageBox.Show("Thêm chi tiết phiếu giao hàng thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Thêm phiếu giao hàng thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            btnIn.Enabled = false;
-            btnThemSP.Enabled = false;
-            // Xuất ra cystal report
-            frmXuatPhieuGiaoHang frm = new frmXuatPhieuGiaoHang(txtSoPG.Text);
-            this.Hide();
-            frm.ShowDialog();
-            this.Show();
+            else
+                MessageBox.Show(string.Format("{0}", PhieuGiaoHangBUS.KiemTraChiTietPhieuGiao(dgvDanhSach.RowCount)), "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void txtMaPGNCC_TextChanged(object sender, EventArgs e)
         {
-            if(txtMaPGNCC.Text =="")
-                btnGhiPhieu.Enabled = false;
+            if (txtMaPGNCC.Text == "")
+                btnLapPhieuMoi.Enabled = false;
             else
-                btnGhiPhieu.Enabled = true;
+                btnLapPhieuMoi.Enabled = true;
         }
     }
 }

@@ -48,6 +48,14 @@ namespace BUS
             return thongbao;
         }
 
+        public static string KiemTraChiTietPhieuGiao(int count)
+        {
+            string thongbao = "";
+            if (count == 0)
+                thongbao += "- Chưa có thêm sản phẩm vào chi tiết phiếu giao hàng.\n";
+            return thongbao;
+        }
+        
         public static bool ThemCTPG(ChiTietPhieuGiaoHangDTO CT)
         {
             return PhieuGiaoHangDAO.ThemCTPG(CT);
@@ -61,6 +69,11 @@ namespace BUS
         public static DataSet XuatPhieuGiaoHang(string MaPG)
         {
             return PhieuGiaoHangDAO.XuatPhieuGiaoHang(MaPG);
+        }
+
+        public static DataTable TongSLHangPGH(string MaDDH)
+        {
+            return PhieuGiaoHangDAO.TongSLHangPGH(MaDDH);
         }
     }
 }

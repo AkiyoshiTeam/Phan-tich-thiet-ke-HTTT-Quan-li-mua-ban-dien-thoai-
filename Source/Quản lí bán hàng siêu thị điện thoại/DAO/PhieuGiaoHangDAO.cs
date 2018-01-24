@@ -151,5 +151,18 @@ namespace DAO
             con.Close();
             return dtset;
         }
+
+        public static DataTable TongSLHangPGH(string MaDDH)
+        {
+            SqlConnection con = DataProvider.Connection();
+            DataTable dt = new DataTable();
+            string sql = @"Select SUM(C.SoLuong) as 'TongSLHangPGH' " +
+                          "From (PhieuGiaoHang P join ChiTietPhieuGiaoHang C on P.MaPhieuGiaoHang=C.MaPhieuGiao) join DonDatHang D on D.MaDonDatHang=P.MaDonDatHang " +
+                          "Where D.MaDonDatHang =" + "'" + MaDDH + "'";
+            SqlDataAdapter da = new SqlDataAdapter(sql, con);
+            da.Fill(dt);
+            con.Close();
+            return dt;
+        }
     }
 }

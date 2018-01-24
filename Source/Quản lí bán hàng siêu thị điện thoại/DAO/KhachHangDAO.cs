@@ -22,5 +22,26 @@ namespace DAO
             con.Close();
             return dt;
         }
+
+        public static bool UpdateDiemKH(string MaKH, int Diemsau)
+        {
+            try
+            {
+                SqlConnection con = DataProvider.Connection();
+                SqlCommand cmd = new SqlCommand("sp_UpdateDiemKH", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@makh", SqlDbType.VarChar);
+                cmd.Parameters.Add("@diemsau", SqlDbType.Int);
+                cmd.Parameters["@makh"].Value = MaKH;
+                cmd.Parameters["@diemsau"].Value = Diemsau;
+                cmd.ExecuteNonQuery();
+                con.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

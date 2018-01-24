@@ -100,7 +100,7 @@ begin
    values(@mahd,@masp,@soluong)
 end
 go
--- Update số lượng tồn kho --
+-- Update số lượng tồn kho sau khi mua hàng --
 Create proc sp_UpdateSLT
 @masp varchar(10),
 @soluongban int
@@ -181,4 +181,20 @@ begin
    Update SanPham set SoLuongTon=@soluongton where MaSanPham=@masp
 end
 go
---
+-- Cập nhật điểm cho khách hàng --
+Create proc sp_UpdateDiemKH
+@makh varchar(10),
+@diemsau int
+as
+begin
+   -- lấy điểm ban đầu + điểm sau --
+   declare @tongdiem int
+   declare @diembandau int
+   select @diembandau= Diem 
+   from KhachHang
+   where MaKhachHang=@makh
+   set @tongdiem=@diembandau+@diemsau
+   Update KhachHang set Diem=@tongdiem where MaKhachHang=@makh
+end
+go
+

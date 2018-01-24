@@ -46,6 +46,14 @@ namespace BUS
             return thongbao;
         }
 
+        public static string KiemTraChiTietHoaDon(int count)
+        {
+            string thongbao = "";
+            if (count == 0)
+                thongbao += "- Chưa có thêm sản phẩm vào chi tiết hóa đơn.\n";
+            return thongbao;
+        }
+
         public static int TinhTongTien(int SoLuong, int Gia)
         {
             int Tong = 0;

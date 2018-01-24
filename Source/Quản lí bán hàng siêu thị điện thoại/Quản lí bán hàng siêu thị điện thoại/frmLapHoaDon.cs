@@ -41,10 +41,14 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
             btnLapHoaDonMoi.Enabled = false;
             btnThemSP.Enabled = false;
             pbcheck.Enabled = true;
+            btnIn.Enabled = true;
+            txtMaKH.ReadOnly = false;
             txtSoHD.Text = HoaDonBanHangBUS.GetIDHoaDon();
             txtMaSP.ResetText();
             txtTenSP.ResetText();
+            txtGiamGia.ResetText();
             txtGiaBan.ResetText();
+            txtMaKH.ResetText();
             dtkNgayLap.Value = DateTime.Now;
             dgvDanhSach.Rows.Clear();
         }
@@ -54,32 +58,18 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
             bool flag = KhachHangBUS.KiemTraKH(txtMaKH.Text);
             if (flag == false)
             {
-                btnGhiHoaDon.Enabled = false;
+                btnThemSP.Enabled = false;
+                button1.Enabled = true;
                 MessageBox.Show("Khách hàng không tồn tại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                btnGhiHoaDon.Enabled = true;
+                btnThemSP.Enabled = true;
+                txtMaKH.ReadOnly = true;
+                button1.Enabled = false;
+                txtGiamGia.Text = KhachHangBUS.CapDoGiamGia(txtMaKH.Text);
                 MessageBox.Show("Khách hàng tồn tại.", "Chúc mừng", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-        }
-
-        private void btnGhiHoaDon_Click(object sender, EventArgs e)
-        {
-            HoaDonBanHangDTO HD = new HoaDonBanHangDTO();
-            HD.MaHoaDonBanHang = txtSoHD.Text;
-            HD.NgayLap = dtkNgayLap.Value;
-            HD.MaKhachHang = txtMaKH.Text;
-            HD.MaNhanVien = txtMaNV.Text;
-            if (HoaDonBanHangBUS.ThemHD(HD) == true)
-            {
-                btnLapHoaDonMoi.Enabled = true;
-                btnThemSP.Enabled = true;
-                btnGhiHoaDon.Enabled = false;
-                pbcheck.Enabled = false;
-            }
-            else
-                MessageBox.Show("Thêm hóa đơn thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void txtMaSP_TextChanged(object sender, EventArgs e)
@@ -127,7 +117,7 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
                 MessageBox.Show(string.Format("{0}", HoaDonBanHangBUS.KiemTra(CT)), "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else if (txtTenSP.Text != "")
             {
-                // Đưa giá trị vào DataGridView
+                // Đưa giá trị vào DataGridView.
                 if (dgvDanhSach.Rows.Count > 0)
                 {
                     foreach (DataGridViewRow row in dgvDanhSach.Rows)
@@ -159,7 +149,7 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
                     dgvDanhSach.Rows[i].Cells[3].Value = txtGiaBan.Text;
                     i++;
                 }
-                // Tính tổng tiền
+                // Tính tổng tiền.
                 TongTien();
             }
         }
@@ -189,31 +179,55 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
 
         private void btnIn_Click(object sender, EventArgs e)
         {
-            for (int k = 0; k < dgvDanhSach.Rows.Count; k++)
+            int SoDiem = 0;
+            if (HoaDonBanHangBUS.KiemTraChiTietHoaDon(dgvDanhSach.RowCount) == "")
             {
-                ChiTietHoaDonBanHangDTO CT = new ChiTietHoaDonBanHangDTO();
-                CT.MaHoaDonBanHang = txtSoHD.Text;
-                CT.MaSanPham = dgvDanhSach.Rows[k].Cells[0].Value.ToString();
-                CT.SoLuong = int.Parse(dgvDanhSach.Rows[k].Cells[2].Value.ToString());
-                if (HoaDonBanHangBUS.ThemCTHD(CT) == true)
+                // Thêm hóa đơn mới.
+                HoaDonBanHangDTO HD = new HoaDonBanHangDTO();
+                HD.MaHoaDonBanHang = txtSoHD.Text;
+                HD.NgayLap = dtkNgayLap.Value;
+                HD.MaKhachHang = txtMaKH.Text;
+                HD.MaNhanVien = txtMaNV.Text;
+                if (HoaDonBanHangBUS.ThemHD(HD) == true)
                 {
-                    // Update tổng tiền.
-                    if (HoaDonBanHangBUS.UpdateTT(txtSoHD.Text, Tien) == false)
-                        MessageBox.Show("Cập nhật tổng tiền thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    // Update số lượng tồn.
-                    if (HoaDonBanHangBUS.UpdateSLT(dgvDanhSach.Rows[k].Cells[0].Value.ToString(), int.Parse(dgvDanhSach.Rows[k].Cells[2].Value.ToString())) == false)
-                        MessageBox.Show("Cập nhật số lượng tồn thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    btnLapHoaDonMoi.Enabled = true;
+                    pbcheck.Enabled = false;
+                    // Thêm chi tiết hóa đơn.
+                    for (int k = 0; k < dgvDanhSach.Rows.Count; k++)
+                    {
+                        ChiTietHoaDonBanHangDTO CT = new ChiTietHoaDonBanHangDTO();
+                        CT.MaHoaDonBanHang = txtSoHD.Text;
+                        CT.MaSanPham = dgvDanhSach.Rows[k].Cells[0].Value.ToString();
+                        CT.SoLuong = int.Parse(dgvDanhSach.Rows[k].Cells[2].Value.ToString());
+                        if (HoaDonBanHangBUS.ThemCTHD(CT) == true)
+                        {
+                            // Update tổng tiền.
+                            if (HoaDonBanHangBUS.UpdateTT(txtSoHD.Text, Tien) == false)
+                                MessageBox.Show("Cập nhật tổng tiền thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            // Update số lượng tồn.
+                            if (HoaDonBanHangBUS.UpdateSLT(dgvDanhSach.Rows[k].Cells[0].Value.ToString(), int.Parse(dgvDanhSach.Rows[k].Cells[2].Value.ToString())) == false)
+                                MessageBox.Show("Cập nhật số lượng tồn thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else
+                            MessageBox.Show("Thêm chi tiết hóa đơn thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    // Cập nhật điểm cho khách hàng.
+                    SoDiem = KhachHangBUS.Congdiem(Tien);
+                    if (KhachHangBUS.UpdateDiemKH(txtMaKH.Text, SoDiem) == false)
+                        MessageBox.Show("Cập nhật điểm thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    btnIn.Enabled = false;
+                    btnThemSP.Enabled = false;
+                    // Xuất ra cystal report.
+                    frmXuatHoaDonBanHang frm = new frmXuatHoaDonBanHang(txtSoHD.Text);
+                    this.Hide();
+                    frm.ShowDialog();
+                    this.Show();
                 }
                 else
-                    MessageBox.Show("Thêm chi tiết hóa đơn thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Thêm hóa đơn thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            btnIn.Enabled = false;
-            btnThemSP.Enabled = false;
-            // Xuất ra cystal report
-            frmXuatHoaDonBanHang frm = new frmXuatHoaDonBanHang(txtSoHD.Text);
-            this.Hide();
-            frm.ShowDialog();
-            this.Show();
+            else
+                MessageBox.Show(string.Format("{0}", HoaDonBanHangBUS.KiemTraChiTietHoaDon(dgvDanhSach.RowCount)), "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void txtSoLuong_TextChanged(object sender, EventArgs e)
@@ -227,6 +241,12 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
             Flag = HoaDonBanHangBUS.KiemTraSLT(txtMaSP.Text, SL);
             if(Flag == false)
                 MessageBox.Show("Số lượng hàng không đủ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            frmTiepNhanKH frm = new frmTiepNhanKH();
+            frm.ShowDialog();
         }
     }
 }

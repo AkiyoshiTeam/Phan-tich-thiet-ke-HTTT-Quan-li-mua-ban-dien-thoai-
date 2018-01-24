@@ -58,6 +58,29 @@ namespace BUS
             return thongbao;
         }
 
+        public static int KiemTraSLHang(string MaDDH)
+        {
+            int flag = 0;
+            int TongSLHangDDH = 0, TongSLHangPGH = 0; 
+            // Lấy tổng số lượng hàng của đơn đặt hàng. 
+            foreach (DataRow row in DonDatHangBUS.TongSLHangDDH(MaDDH).Rows)
+            {
+                TongSLHangDDH = (int)row["TongSLHangDDH"];
+            }
+            // Lấy tổng số lượng hàng của các phiếu giao hàng
+            foreach (DataRow row in PhieuGiaoHangBUS.TongSLHangPGH(MaDDH).Rows)
+            {
+                TongSLHangPGH = (int)row["TongSLHangPGH"];
+            }
+            if (TongSLHangDDH == TongSLHangPGH)
+                flag = 0;
+            else if (TongSLHangDDH > TongSLHangPGH)
+                flag = 1;
+            else if (TongSLHangPGH == 0)
+                flag = -1;
+            return flag;
+        }
+
         public static bool ThemCTPD(ChiTietDonDatHangDTO PD)
         {
             return DonDatHangDAO.ThemCTPD(PD);
@@ -98,6 +121,11 @@ namespace BUS
         public static bool UpdateTrangThai(string MaDDH, int MaTT)
         {
             return DonDatHangDAO.UpdateTrangThai(MaDDH, MaTT);
+        }
+
+        public static DataTable TongSLHangDDH(string MaDDH)
+        {
+            return DonDatHangDAO.TongSLHangDDH(MaDDH);
         }
     }
 }

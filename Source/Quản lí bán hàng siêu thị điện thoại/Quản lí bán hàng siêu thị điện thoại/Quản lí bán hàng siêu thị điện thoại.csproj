@@ -97,6 +97,12 @@
     <Compile Include="frmPhieuGiaoHang.Designer.cs">
       <DependentUpon>frmPhieuGiaoHang.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmTiepNhanKH.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTiepNhanKH.Designer.cs">
+      <DependentUpon>frmTiepNhanKH.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmXuatDonDatHang.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -174,6 +180,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPhieuGiaoHang.resx">
       <DependentUpon>frmPhieuGiaoHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTiepNhanKH.resx">
+      <DependentUpon>frmTiepNhanKH.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmXuatDonDatHang.resx">
       <DependentUpon>frmXuatDonDatHang.cs</DependentUpon>

@@ -44,7 +44,6 @@
             this.btnLapPhieuMoi = new System.Windows.Forms.Button();
             this.cboMaDH = new System.Windows.Forms.ComboBox();
             this.dtkNgayGiao = new System.Windows.Forms.DateTimePicker();
-            this.btnGhiPhieu = new System.Windows.Forms.Button();
             this.txtSoPG = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -153,7 +152,6 @@
             this.groupBox1.Controls.Add(this.btnLapPhieuMoi);
             this.groupBox1.Controls.Add(this.cboMaDH);
             this.groupBox1.Controls.Add(this.dtkNgayGiao);
-            this.groupBox1.Controls.Add(this.btnGhiPhieu);
             this.groupBox1.Controls.Add(this.txtSoPG);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
@@ -191,7 +189,7 @@
             this.btnIn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnIn.Location = new System.Drawing.Point(566, 68);
             this.btnIn.Name = "btnIn";
-            this.btnIn.Size = new System.Drawing.Size(95, 31);
+            this.btnIn.Size = new System.Drawing.Size(206, 31);
             this.btnIn.TabIndex = 4;
             this.btnIn.Text = "Lưu và In";
             this.btnIn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -228,20 +226,6 @@
             this.dtkNgayGiao.Name = "dtkNgayGiao";
             this.dtkNgayGiao.Size = new System.Drawing.Size(144, 26);
             this.dtkNgayGiao.TabIndex = 4;
-            // 
-            // btnGhiPhieu
-            // 
-            this.btnGhiPhieu.Enabled = false;
-            this.btnGhiPhieu.Image = ((System.Drawing.Image)(resources.GetObject("btnGhiPhieu.Image")));
-            this.btnGhiPhieu.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGhiPhieu.Location = new System.Drawing.Point(676, 68);
-            this.btnGhiPhieu.Name = "btnGhiPhieu";
-            this.btnGhiPhieu.Size = new System.Drawing.Size(96, 31);
-            this.btnGhiPhieu.TabIndex = 3;
-            this.btnGhiPhieu.Text = "Ghi phiếu ";
-            this.btnGhiPhieu.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnGhiPhieu.UseVisualStyleBackColor = true;
-            this.btnGhiPhieu.Click += new System.EventHandler(this.btnGhiPhieu_Click);
             // 
             // txtSoPG
             // 
@@ -405,7 +389,6 @@
         private System.Windows.Forms.Button btnLapPhieuMoi;
         private System.Windows.Forms.ComboBox cboMaDH;
         private System.Windows.Forms.DateTimePicker dtkNgayGiao;
-        private System.Windows.Forms.Button btnGhiPhieu;
         private System.Windows.Forms.TextBox txtSoPG;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;

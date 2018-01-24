@@ -42,3 +42,4 @@ D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\Qu�
 D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\Quản lí bán hàng siêu thị điện thoại\obj\Debug\Quản_lí_bán_hàng_siêu_thị_điện_thoại.frmPhieuGiaoHang.resources
 D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\Quản lí bán hàng siêu thị điện thoại\obj\Debug\Quản_lí_bán_hàng_siêu_thị_điện_thoại.frmLapPhieuGiaoHang.resources
 D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\Quản lí bán hàng siêu thị điện thoại\obj\Debug\Quản_lí_bán_hàng_siêu_thị_điện_thoại.frmXuatPhieuGiaoHang.resources
+D:\Đồ án PTHTTT\Source\Quản lí bán hàng siêu thị điện thoại\Quản lí bán hàng siêu thị điện thoại\obj\Debug\Quản_lí_bán_hàng_siêu_thị_điện_thoại.frmTiepNhanKH.resources

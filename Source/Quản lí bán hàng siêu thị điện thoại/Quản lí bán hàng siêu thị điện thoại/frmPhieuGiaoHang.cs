@@ -181,7 +181,8 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
             dgvCo.DisplayMember = "TenTrangThai";
             dgvCo.ValueMember = "MaTrangThaiDonDatHang";
             dgvCo.DataPropertyName = "MaTrangTrangThai";
-            dgvCo.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+            dgvCo.DisplayStyle = DataGridViewComboBoxDisplayStyle.Nothing;
+            dgvCo.ReadOnly = true;
             dgvDanhSachPD.Columns.Add(dgvCo);
         }
 
@@ -237,6 +238,32 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
 
         void LoadData()
         {
+            // Cập nhật trạng thái đơn dặt hàng.
+            if (dgvDanhSachPD.Rows.Count > 0)
+            {
+                if (DonDatHangBUS.KiemTraSLHang(dgvDanhSachPD.CurrentRow.Cells[0].Value.ToString()) == 0)
+                {
+                    if (DonDatHangBUS.UpdateTrangThai(dgvDanhSachPD.CurrentRow.Cells[0].Value.ToString(), 3) == false)
+                    {
+                        MessageBox.Show("Cập nhật trạng thái thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else if (DonDatHangBUS.KiemTraSLHang(dgvDanhSachPD.CurrentRow.Cells[0].Value.ToString()) == 1)
+                {
+                    if (DonDatHangBUS.UpdateTrangThai(dgvDanhSachPD.CurrentRow.Cells[0].Value.ToString(), 2) == false)
+                    {
+                        MessageBox.Show("Cập nhật trạng thái thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else if (DonDatHangBUS.KiemTraSLHang(dgvDanhSachPD.CurrentRow.Cells[0].Value.ToString()) == -1)
+                {
+                    if (DonDatHangBUS.UpdateTrangThai(dgvDanhSachPD.CurrentRow.Cells[0].Value.ToString(), 1) == false)
+                    {
+                        MessageBox.Show("Cập nhật trạng thái thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            // Load data.
             dgvDanhSachPG.DataSource = PhieuGiaoHangBUS.DanhSachPG();
             Custom1();
             dgvDanhSachPG.ClearSelection();
@@ -256,7 +283,7 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
                 dgvChiTietPG.DataSource = null;
                 dgvDanhSachPD.DataSource = null;
                 dgvChiTietPD.DataSource = null;
-            }
+            }   
         }
 
         private void tsbtnLapphieu_Click(object sender, EventArgs e)
@@ -264,14 +291,6 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
             frmLapPhieuGiaoHang frm = new frmLapPhieuGiaoHang();
             frm.ShowDialog();
             LoadData();
-        }
-
-        private void dgvDanhSachPD_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            if(DonDatHangBUS.UpdateTrangThai(dgvDanhSachPD.CurrentRow.Cells[0].Value.ToString(),Int32.Parse(dgvDanhSachPD.CurrentRow.Cells[3].Value.ToString()))== false)
-            {
-                MessageBox.Show("Cập nhật trạng thái thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
     }
 }

@@ -185,7 +185,6 @@
             this.dgvDanhSachPD.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDanhSachPD.Size = new System.Drawing.Size(579, 258);
             this.dgvDanhSachPD.TabIndex = 5;
-            this.dgvDanhSachPD.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDanhSachPD_CellEndEdit);
             // 
             // groupBox4
             // 
