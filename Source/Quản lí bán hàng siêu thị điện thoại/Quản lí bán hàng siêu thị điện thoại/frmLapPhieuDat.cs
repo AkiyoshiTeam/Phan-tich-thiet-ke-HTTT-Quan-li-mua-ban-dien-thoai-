@@ -36,10 +36,10 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
             i = 0;
             Tien = 0;
             txtTongtien.Text = "0";
-            btnGhiPhieu.Enabled = true;
             btnLapPhieuMoi.Enabled = false;
-            btnThemSP.Enabled = false;
-            cboNCC.Enabled = true;
+            btnThemSP.Enabled = true;
+            cboNCC.Enabled = false;
+            btnIn.Enabled = true;
             txtSoPĐ.Text = DonDatHangBUS.GetIDPhieuDat();
             txtMaSP.ResetText();
             txtTenSP.ResetText();
@@ -47,32 +47,15 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
             txtGia.ResetText();
             dtkNgayDat.Value = DateTime.Now;
             dgvDanhSach.Rows.Clear();
-        }
-
-        private void btnGhiPhieu_Click(object sender, EventArgs e)
-        {
-            DonDatHangDTO DDH = new DonDatHangDTO();
-            DDH.MaDonDatHang = txtSoPĐ.Text;
-            DDH.NgayLap = dtkNgayDat.Value;
-
-            if(DonDatHangBUS.ThemPD(DDH) == true)
+            // Thêm vào auto complete.
+            AutoCompleteStringCollection auto = new AutoCompleteStringCollection();
+            foreach (DataRow row in SanPhamBUS.DanhSachSPTheoNCC(cboNCC.SelectedValue.ToString()).Rows)
             {
-                btnLapPhieuMoi.Enabled = true;
-                btnThemSP.Enabled = true;
-                btnGhiPhieu.Enabled = false;
-                cboNCC.Enabled = false;
-
-                AutoCompleteStringCollection auto = new AutoCompleteStringCollection();
-                foreach (DataRow row in SanPhamBUS.DanhSachSPTheoNCC(cboNCC.SelectedValue.ToString()).Rows)
-                {
-                    auto.Add(row["MaSanPham"].ToString());
-                }
-                txtMaSP.AutoCompleteMode = AutoCompleteMode.Suggest;
-                txtMaSP.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                txtMaSP.AutoCompleteCustomSource = auto;
+                auto.Add(row["MaSanPham"].ToString());
             }
-            else
-                MessageBox.Show("Thêm phiếu đặt hàng thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            txtMaSP.AutoCompleteMode = AutoCompleteMode.Suggest;
+            txtMaSP.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            txtMaSP.AutoCompleteCustomSource = auto;
         }
 
         private void txtMaSP_TextChanged(object sender, EventArgs e)
@@ -121,7 +104,7 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
                 MessageBox.Show(string.Format("{0}", DonDatHangBUS.KiemTra(CT, txtTenSP.Text, txtGia.Text)), "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
             {
-                // Đưa giá trị vào DataGridView
+                // Đưa giá trị vào DataGridView.
                 if (dgvDanhSach.Rows.Count > 0)
                 {
                     foreach (DataGridViewRow row in dgvDanhSach.Rows)
@@ -153,7 +136,7 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
                     dgvDanhSach.Rows[i].Cells[3].Value = txtSoLuong.Text;
                     i++;
                 }
-                // Tính tổng tiền
+                // Tính tổng tiền.
                 TongTien();
             }
         }
@@ -170,28 +153,45 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
 
         private void btnIn_Click(object sender, EventArgs e)
         {
-            for (int k = 0; k < dgvDanhSach.Rows.Count; k++)
+            if (DonDatHangBUS.KiemTraChiTietDonDatHang(dgvDanhSach.RowCount) == "")
             {
-                ChiTietDonDatHangDTO PN = new ChiTietDonDatHangDTO();
-                PN.MaDonDatHang = txtSoPĐ.Text;
-                PN.MaSanPham = dgvDanhSach.Rows[k].Cells[0].Value.ToString();
-                PN.SoLuong = int.Parse(dgvDanhSach.Rows[k].Cells[3].Value.ToString());
-                if (DonDatHangBUS.ThemCTPD(PN) == true)
+                // Thêm đơn đặt hàng.
+                DonDatHangDTO DDH = new DonDatHangDTO();
+                DDH.MaDonDatHang = txtSoPĐ.Text;
+                DDH.NgayLap = dtkNgayDat.Value;
+                if (DonDatHangBUS.ThemPD(DDH) == true)
                 {
-                    btnIn.Enabled = false;
+                    btnLapPhieuMoi.Enabled = true;
                     btnThemSP.Enabled = false;
-                    // Update tổng tiền.
-                    if (DonDatHangBUS.UpdateTT(txtSoPĐ.Text, Tien) == false)
-                        MessageBox.Show("Cập nhật tổng tiền thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    cboNCC.Enabled = true;
+                    // Thêm chi tiết đơn đặt hàng.
+                    for (int k = 0; k < dgvDanhSach.Rows.Count; k++)
+                    {
+                        ChiTietDonDatHangDTO PN = new ChiTietDonDatHangDTO();
+                        PN.MaDonDatHang = txtSoPĐ.Text;
+                        PN.MaSanPham = dgvDanhSach.Rows[k].Cells[0].Value.ToString();
+                        PN.SoLuong = int.Parse(dgvDanhSach.Rows[k].Cells[3].Value.ToString());
+                        if (DonDatHangBUS.ThemCTPD(PN) == true)
+                        {
+                            btnIn.Enabled = false;
+                            // Update tổng tiền.
+                            if (DonDatHangBUS.UpdateTT(txtSoPĐ.Text, Tien) == false)
+                                MessageBox.Show("Cập nhật tổng tiền thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else
+                            MessageBox.Show("Thêm chi tiết phiếu đặt hàng thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    // Xuất ra cystal report.
+                    frmXuatDonDatHang frm = new frmXuatDonDatHang(txtSoPĐ.Text);
+                    this.Hide();
+                    frm.ShowDialog();
+                    this.Show();
                 }
                 else
-                    MessageBox.Show("Thêm chi tiết phiếu đặt hàng thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Thêm phiếu đặt hàng thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            // Xuất ra cystal report
-            frmXuatDonDatHang frm = new frmXuatDonDatHang(txtSoPĐ.Text);
-            this.Hide();
-            frm.ShowDialog();
-            this.Show();
+            else
+                MessageBox.Show(string.Format("{0}", DonDatHangBUS.KiemTraChiTietDonDatHang(dgvDanhSach.RowCount)), "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void txtSoLuong_KeyPress(object sender, KeyPressEventArgs e)

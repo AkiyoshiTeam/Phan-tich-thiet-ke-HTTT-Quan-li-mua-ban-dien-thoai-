@@ -50,6 +50,14 @@ namespace BUS
             return thongbao;
         }
 
+        public static string KiemTraChiTietDonDatHang(int count)
+        {
+            string thongbao = "";
+            if (count == 0)
+                thongbao += "- Chưa có thêm sản phẩm vào chi tiết đơn đặt hàng.\n";
+            return thongbao;
+        }
+
         public static bool ThemCTPD(ChiTietDonDatHangDTO PD)
         {
             return DonDatHangDAO.ThemCTPD(PD);
