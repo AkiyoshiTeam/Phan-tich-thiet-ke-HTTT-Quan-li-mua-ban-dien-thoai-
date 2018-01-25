@@ -70,7 +70,14 @@ namespace BUS
             // Lấy tổng số lượng hàng của các phiếu giao hàng
             foreach (DataRow row in PhieuGiaoHangBUS.TongSLHangPGH(MaDDH).Rows)
             {
-                TongSLHangPGH = (int)row["TongSLHangPGH"];
+                try
+                {
+                    TongSLHangPGH = (int)row["TongSLHangPGH"];
+                }
+                catch
+                {
+                    TongSLHangPGH = 0;
+                }
             }
             if (TongSLHangDDH == TongSLHangPGH)
                 flag = 0;
@@ -80,7 +87,16 @@ namespace BUS
                 flag = -1;
             return flag;
         }
-
+        // Kiểm tra trạng thái đơn dặt hàng hàng.
+        public static bool KiemTraTrangTháiDDH(int MaTT)
+        {
+            bool flag;
+            if (MaTT == 3)
+                flag = false;
+            else
+                flag = true;
+            return flag;
+        }
         public static bool ThemCTPD(ChiTietDonDatHangDTO PD)
         {
             return DonDatHangDAO.ThemCTPD(PD);

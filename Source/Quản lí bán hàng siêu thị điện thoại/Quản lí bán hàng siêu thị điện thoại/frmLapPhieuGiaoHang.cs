@@ -175,6 +175,28 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
                     }
                     btnIn.Enabled = false;
                     btnThemSP.Enabled = false;
+                    // Cập nhật trạng thái đơn dặt hàng.
+                    if (DonDatHangBUS.KiemTraSLHang(cboMaDH.SelectedValue.ToString()) == 0)
+                    {
+                        if (DonDatHangBUS.UpdateTrangThai(cboMaDH.SelectedValue.ToString(), 3) == false)
+                        {
+                            MessageBox.Show("Cập nhật trạng thái thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else if (DonDatHangBUS.KiemTraSLHang(cboMaDH.SelectedValue.ToString()) == 1)
+                    {
+                        if (DonDatHangBUS.UpdateTrangThai(cboMaDH.SelectedValue.ToString(), 2) == false)
+                        {
+                            MessageBox.Show("Cập nhật trạng thái thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else if (DonDatHangBUS.KiemTraSLHang(cboMaDH.SelectedValue.ToString()) == -1)
+                    {
+                        if (DonDatHangBUS.UpdateTrangThai(cboMaDH.SelectedValue.ToString(), 1) == false)
+                        {
+                            MessageBox.Show("Cập nhật trạng thái thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
                     // Xuất ra cystal report
                     frmXuatPhieuGiaoHang frm = new frmXuatPhieuGiaoHang(txtSoPG.Text);
                     this.Hide();

@@ -228,19 +228,24 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
 
         private void tsbtnXoa_Click(object sender, EventArgs e)
         {
-            if (PhieuGiaoHangBUS.XoaPG(dgvDanhSachPG.CurrentRow.Cells[0].Value.ToString()) == true)
+            if (DonDatHangBUS.KiemTraTrangTháiDDH(Int32.Parse(dgvDanhSachPD.CurrentRow.Cells[3].Value.ToString()))==true)
             {
-                LoadData();
+                if (PhieuGiaoHangBUS.XoaPG(dgvDanhSachPG.CurrentRow.Cells[0].Value.ToString()) == true)
+                {
+                    LoadData();
+                }
+                else
+                    MessageBox.Show("Xóa thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
-                MessageBox.Show("Xóa thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Không thể xóa phiếu giao hàng này vì đã nhận đủ hàng.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         void LoadData()
         {
-            // Cập nhật trạng thái đơn dặt hàng.
             if (dgvDanhSachPD.Rows.Count > 0)
             {
+                // Cập nhật trạng thái đơn dặt hàng.
                 if (DonDatHangBUS.KiemTraSLHang(dgvDanhSachPD.CurrentRow.Cells[0].Value.ToString()) == 0)
                 {
                     if (DonDatHangBUS.UpdateTrangThai(dgvDanhSachPD.CurrentRow.Cells[0].Value.ToString(), 3) == false)
@@ -262,28 +267,28 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
                         MessageBox.Show("Cập nhật trạng thái thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
+                // Load data.
+                dgvDanhSachPG.DataSource = PhieuGiaoHangBUS.DanhSachPG();
+                Custom1();
+                dgvDanhSachPG.ClearSelection();
+                if (dgvDanhSachPG.Rows.Count > 0)
+                {
+                    dgvChiTietPG.DataSource = PhieuGiaoHangBUS.DanhSachCTPG(dgvDanhSachPG.CurrentRow.Cells[0].Value.ToString());
+                    Custom2();
+                    dgvChiTietPG.ClearSelection();
+                    dgvDanhSachPD.DataSource = DonDatHangBUS.DanhSachDDHTheoMaPG(dgvDanhSachPG.CurrentRow.Cells[0].Value.ToString());
+                    Custom3();
+                    dgvChiTietPD.DataSource = DonDatHangBUS.DanhSachCTPD(dgvDanhSachPD.CurrentRow.Cells[0].Value.ToString());
+                    Custom4();
+                    dgvChiTietPD.ClearSelection();
+                }
+                else
+                {
+                    dgvChiTietPG.DataSource = null;
+                    dgvDanhSachPD.DataSource = null;
+                    dgvChiTietPD.DataSource = null;
+                }
             }
-            // Load data.
-            dgvDanhSachPG.DataSource = PhieuGiaoHangBUS.DanhSachPG();
-            Custom1();
-            dgvDanhSachPG.ClearSelection();
-            if (dgvDanhSachPG.Rows.Count > 0)
-            {
-                dgvChiTietPG.DataSource = PhieuGiaoHangBUS.DanhSachCTPG(dgvDanhSachPG.CurrentRow.Cells[0].Value.ToString());
-                Custom2();
-                dgvChiTietPG.ClearSelection();
-                dgvDanhSachPD.DataSource = DonDatHangBUS.DanhSachDDHTheoMaPG(dgvDanhSachPG.CurrentRow.Cells[0].Value.ToString());
-                Custom3();
-                dgvChiTietPD.DataSource = DonDatHangBUS.DanhSachCTPD(dgvDanhSachPD.CurrentRow.Cells[0].Value.ToString());
-                Custom4();
-                dgvChiTietPD.ClearSelection();
-            }
-            else
-            {
-                dgvChiTietPG.DataSource = null;
-                dgvDanhSachPD.DataSource = null;
-                dgvChiTietPD.DataSource = null;
-            }   
         }
 
         private void tsbtnLapphieu_Click(object sender, EventArgs e)
