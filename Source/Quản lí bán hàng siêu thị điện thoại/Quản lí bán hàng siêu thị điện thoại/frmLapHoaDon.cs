@@ -124,7 +124,7 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
                     {
                         if (txtMaSP.Text == dgvDanhSach.Rows[j].Cells[0].Value.ToString())
                         {
-                            dgvDanhSach.Rows[j].Cells[2].Value = (Int32.Parse(dgvDanhSach.Rows[j].Cells[2].Value.ToString()) + 1).ToString();
+                            dgvDanhSach.Rows[j].Cells[2].Value = (Int32.Parse(dgvDanhSach.Rows[j].Cells[2].Value.ToString()) + Int32.Parse(txtSoLuong.Text)).ToString();
                             break;
                         }
                         else if (j == dgvDanhSach.Rows.Count - 1)
