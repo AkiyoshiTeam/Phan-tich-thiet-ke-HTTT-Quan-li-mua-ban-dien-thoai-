@@ -62,11 +62,13 @@ namespace DAO
                 cmd.Parameters.Add("@ngaylap", SqlDbType.Date);
                 cmd.Parameters.Add("@makh", SqlDbType.VarChar);
                 cmd.Parameters.Add("@manv", SqlDbType.VarChar);
+                cmd.Parameters.Add("@tongtien", SqlDbType.Int);
 
                 cmd.Parameters["@mahd"].Value = HD.MaHoaDonBanHang;
                 cmd.Parameters["@ngaylap"].Value = HD.NgayLap;
                 cmd.Parameters["@makh"].Value = HD.MaKhachHang;
                 cmd.Parameters["@manv"].Value = HD.MaNhanVien;
+                cmd.Parameters["@tongtien"].Value = HD.TongTien;
                 cmd.ExecuteNonQuery();
                 con.Close();
                 return true;
@@ -109,23 +111,6 @@ namespace DAO
                 cmd.Parameters["@mahd"].Value = CTHD.MaHoaDonBanHang;
                 cmd.Parameters["@masp"].Value = CTHD.MaSanPham;
                 cmd.Parameters["@soluong"].Value = CTHD.SoLuong;
-                cmd.ExecuteNonQuery();
-                con.Close();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public static bool UpdateTT(string MaHD, long TongTien)
-        {
-            try
-            {
-                SqlConnection con = DataProvider.Connection();
-                string sql = @"Update HoaDonBanHang set TongTien='" + TongTien.ToString() + "' Where MaHoaDonBanHang='" + MaHD + "'";
-                SqlCommand cmd = new SqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
                 con.Close();
                 return true;

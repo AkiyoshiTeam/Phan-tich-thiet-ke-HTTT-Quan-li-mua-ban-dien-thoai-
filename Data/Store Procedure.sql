@@ -22,11 +22,12 @@ go
 -- Thêm phiếu đặt -- 
 Create proc sp_ThemPD
 @maddh varchar(10),
-@ngaydat date
+@ngaydat date,
+@tongtien int
 as
 begin
    Insert into DonDatHang(MaDonDatHang,NgayLap,MaTrangTrangThai,TongTien)
-   values (@maddh,@ngaydat,0,0)
+   values (@maddh,@ngaydat,0,@tongtien)
 end
 go
 -- Thêm chi tiết phiếu đặt --
@@ -73,11 +74,12 @@ Create proc sp_ThemHD
 @mahd varchar(10),
 @ngaylap date,
 @makh varchar(10),
-@manv varchar(10)
+@manv varchar(10),
+@tongtien int
 as
 begin
    insert into HoaDonBanHang(MaHoaDonBanHang,NgayLap,TongTien,TrangThai,MaKhachHang,MaNhanVien)
-   values(@mahd,@ngaylap,0,0,@makh,@manv)
+   values(@mahd,@ngaylap,@tongtien,0,@makh,@manv)
 end
 go
 -- Xóa hóa đơn --

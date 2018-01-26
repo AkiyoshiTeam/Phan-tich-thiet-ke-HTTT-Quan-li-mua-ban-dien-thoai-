@@ -188,6 +188,7 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
                 HD.NgayLap = dtkNgayLap.Value;
                 HD.MaKhachHang = txtMaKH.Text;
                 HD.MaNhanVien = txtMaNV.Text;
+                HD.TongTien = Tien;
                 if (HoaDonBanHangBUS.ThemHD(HD) == true)
                 {
                     btnLapHoaDonMoi.Enabled = true;
@@ -201,9 +202,6 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
                         CT.SoLuong = int.Parse(dgvDanhSach.Rows[k].Cells[2].Value.ToString());
                         if (HoaDonBanHangBUS.ThemCTHD(CT) == true)
                         {
-                            // Update tổng tiền.
-                            if (HoaDonBanHangBUS.UpdateTT(txtSoHD.Text, Tien) == false)
-                                MessageBox.Show("Cập nhật tổng tiền thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             // Update số lượng tồn.
                             if (HoaDonBanHangBUS.UpdateSLT(dgvDanhSach.Rows[k].Cells[0].Value.ToString(), int.Parse(dgvDanhSach.Rows[k].Cells[2].Value.ToString())) == false)
                                 MessageBox.Show("Cập nhật số lượng tồn thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);

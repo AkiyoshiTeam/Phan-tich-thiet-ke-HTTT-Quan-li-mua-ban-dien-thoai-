@@ -66,11 +66,6 @@ namespace BUS
             return HoaDonBanHangDAO.ThemCTHD(CTHD);
         }
 
-        public static bool UpdateTT(string MaHD, long TongTien)
-        {
-            return HoaDonBanHangDAO.UpdateTT(MaHD,TongTien);
-        }
-
         public static bool UpdateSLT(string MaSP, int SoLuongBan)
         {
             return HoaDonBanHangDAO.UpdateSLT(MaSP, SoLuongBan);

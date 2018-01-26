@@ -71,9 +71,11 @@ namespace DAO
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("@maddh", SqlDbType.VarChar);
                 cmd.Parameters.Add("@ngaydat", SqlDbType.Date);
-              
+                cmd.Parameters.Add("@tongtien", SqlDbType.Int);
+
                 cmd.Parameters["@maddh"].Value = DDH.MaDonDatHang;
                 cmd.Parameters["@ngaydat"].Value = DDH.NgayLap;
+                cmd.Parameters["@tongtien"].Value = DDH.TongTien;
                 cmd.ExecuteNonQuery();
                 con.Close();
                 return true;
@@ -130,23 +132,6 @@ namespace DAO
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("@maddh", SqlDbType.NChar);
                 cmd.Parameters["@maddh"].Value = MaDDH;
-                cmd.ExecuteNonQuery();
-                con.Close();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public static bool UpdateTT(string MaDDH, int TongTien)
-        {
-            try
-            {
-                SqlConnection con = DataProvider.Connection();
-                string sql = @"Update DonDatHang set TongTien='" + TongTien.ToString() + "' Where MaDonDatHang='" + MaDDH + "'";
-                SqlCommand cmd = new SqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
                 con.Close();
                 return true;

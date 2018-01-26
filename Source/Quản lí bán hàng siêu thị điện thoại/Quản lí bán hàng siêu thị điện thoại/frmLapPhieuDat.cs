@@ -159,6 +159,7 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
                 DonDatHangDTO DDH = new DonDatHangDTO();
                 DDH.MaDonDatHang = txtSoPĐ.Text;
                 DDH.NgayLap = dtkNgayDat.Value;
+                DDH.TongTien = Tien;
                 if (DonDatHangBUS.ThemPD(DDH) == true)
                 {
                     btnLapPhieuMoi.Enabled = true;
@@ -174,9 +175,6 @@ namespace Quản_lí_bán_hàng_siêu_thị_điện_thoại
                         if (DonDatHangBUS.ThemCTPD(PN) == true)
                         {
                             btnIn.Enabled = false;
-                            // Update tổng tiền.
-                            if (DonDatHangBUS.UpdateTT(txtSoPĐ.Text, Tien) == false)
-                                MessageBox.Show("Cập nhật tổng tiền thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                         else
                             MessageBox.Show("Thêm chi tiết phiếu đặt hàng thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);

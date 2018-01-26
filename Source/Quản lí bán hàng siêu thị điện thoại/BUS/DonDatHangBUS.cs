@@ -119,11 +119,6 @@ namespace BUS
             return Tong;
         }
 
-        public static bool UpdateTT(string MaDDH, int TongTien)
-        {
-            return DonDatHangDAO.UpdateTT(MaDDH, TongTien);
-        }
-
         public static DataTable DanhSachDDHTheoMaPG(string MaPG)
         {
             return DonDatHangDAO.DanhSachDDHTheoMaPG(MaPG);
